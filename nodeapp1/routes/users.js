@@ -1,19 +1,9 @@
 var express = require('express');
 var router = express.Router();
 
-let sql = `SELECT * FROM exchange`;
-
-/* GET userlist. */
-router.get('/rates', function(req, res) {
-    var db = req.db;
-    db.all(sql, [], (err, rows) => {
-        if (err) {
-            throw err;
-        }
-        rows.forEach((row) => {
-            console.log(row.name);
-        });
-    });
+/* GET users listing. */
+router.get('/', function(req, res) {
+  res.send('respond with a resource');
 });
 
 module.exports = router;

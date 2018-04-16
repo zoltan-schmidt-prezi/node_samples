@@ -4,20 +4,21 @@ var router = express.Router();
 let sql = `SELECT * FROM exchange`;
 
 /* GET userlist. */
-router.get('/rates_list', function(req, res) {
+router.get('/', function(req, res) {
     var db = req.db;
-    db.all(sql, [], (err, rows) => {
+    res.set('Content-Type', 'text/plain');
+    let rawData;
+    let ret = db.all(sql, [], (err, rows) => {
         if (err) {
             throw err;
         }
-        let rawData = [];
         rows.forEach((row) => {
-            rawData.push({"id":row.id,"name":row.name,"rate":row.rate});
+            rawData = {id: row.id, name: row.name, rate: row.rate};
+            console.log(JSON.stringify(rawData));
         });
-        console.log(rawData);
-        let json = JSON.parse(rawData[0]);
-        res.json = json;
     });
+    res.json = JSON.stringify(rawData);
+    console.log("XXXXXXXXX" + JSON.stringify(rawData));
 });
 
 module.exports = router;
