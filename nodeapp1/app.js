@@ -7,6 +7,7 @@ const sqlite3 = require('sqlite3').verbose();
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var ratesRouter = require('./routes/rates');
 
 var app = express();
 // database 
@@ -37,6 +38,7 @@ app.use(function(req,res,next){
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/rates', ratesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
