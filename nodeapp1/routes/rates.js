@@ -3,22 +3,28 @@ var router = express.Router();
 
 let sql = `SELECT * FROM exchange`;
 
-/* GET userlist. */
+/* GET rates from db. */
 router.get('/', function(req, res) {
     var db = req.db;
-    res.set('Content-Type', 'text/plain');
-    let rawData;
-    let ret = db.all(sql, [], (err, rows) => {
-        if (err) {
-            throw err;
-        }
-        rows.forEach((row) => {
-            rawData = {id: row.id, name: row.name, rate: row.rate};
-            console.log(JSON.stringify(rawData));
+    var rawData = [];
+
+    let promise = new Promise((resolve, reject) => {
+        db.all(sql, [], (err, rows) => {
+            if (err) {
+                reject("failure");
+                throw err;
+            }
+            rows.forEach((row) => {
+                rawData.push({id: row.id, name: row.name, rate: row.rate});
+                console.log("rawData: " + JSON.stringify(rawData));
+            });
+            resolve("success");
         });
     });
-    res.json = JSON.stringify(rawData);
-    console.log("XXXXXXXXX" + JSON.stringify(rawData));
+    promise.then((successMessage) => {
+        console.log("promise: " + JSON.stringify(rawData));
+        res.json(rawData);
+    });
 });
 
 module.exports = router;
