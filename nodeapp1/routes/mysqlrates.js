@@ -10,20 +10,14 @@ router.get('/', function(req, res) {
     var rawData = [];
 
     let promise = new Promise((resolve, reject) => {
-        mysqldb.connect(function(err) {
-            if(err) {
+        console.log("Connected!");
+        mysqldb.query(sql, function (err, result) {
+            if (err) {
                 reject("failure");
                 throw err;
             }
-            console.log("Connected!");
-            mysqldb.query(sql, function (err, result) {
-                if (err) throw err;
-                /*result.forEach((row) => {
-                    console.log("Result: " + row.id);
-                });*/
                 rawData = result;
                 resolve("success");
-            });
         });
     });
     promise.then((successMessage) => {
