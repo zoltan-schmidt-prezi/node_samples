@@ -1,0 +1,16 @@
+[Unit]
+Description=Exchange rate node app
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/node app.js
+Type=simple
+Restart=always
+User=nobody
+# Note RHEL/Fedora uses 'nobody', Debian/Ubuntu uses 'nogroup'
+Group=nobody  
+Environment=NODE_ENV=production
+WorkingDirectory=/home/ec2-user/node_samples/nodeapp1/
+
+[Install]
+WantedBy=multi-user.target

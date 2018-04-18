@@ -6,6 +6,7 @@ $(document).ready(function() {
 
     // Populate the user table on initial page load
     populateTable();
+    populateMysqlTable();
 
 });
 
@@ -32,5 +33,20 @@ function populateTable() {
         // Inject the whole content string into our existing HTML
         // table
         $('#rateList table tbody').html(tableContent);
+    });
+};
+
+function populateMysqlTable() {
+    var mtableContent = '';
+
+    $.getJSON( '/mysqlrates', function( data ) {
+        $each(data, fucntion(){
+            mtableContent += '<tr>';
+            mtableContent += '<td>' + this.id '</td>';
+            mtableContent += '<td>' + this.name '</td>';
+            mtableContent += '<td>' + this.rate '</td>';
+            mtableContent += '</tr>';
+        });
+        $('#mysqlRateList table tbody').html(mtableContent);
     });
 };

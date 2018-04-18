@@ -4,13 +4,22 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const sqlite3 = require('sqlite3').verbose();
+var mysql = require('mysql');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var ratesRouter = require('./routes/rates');
+var mysqlRatesRouter = require('./routes/mysqlrates')
 
 var app = express();
 // database 
+
+let mysqldb = mysql.createConnection({
+    host: "scraperdb.c1mkc0degkxm.eu-central-1.rds.amazonaws.com",
+    user: "scraper_admin",
+    password: "scraper%admin",
+    database: "scraper_preprod"
+});
 
 let db = new sqlite3.Database('./data/scraper.db', sqlite3.OPEN_READWRITE, (err) => {
     if (err) {
@@ -36,9 +45,15 @@ app.use(function(req,res,next){
     next();
 });
 
+app.use(function(req,res,next){
+    req.mysqldb = mysqldb;
+    next();
+});
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/rates', ratesRouter);
+app.use('/mysqlrates', mysqlRatesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
