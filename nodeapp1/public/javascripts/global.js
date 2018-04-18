@@ -40,11 +40,11 @@ function populateMysqlTable() {
     var mtableContent = '';
 
     $.getJSON( '/mysqlrates', function( data ) {
-        $each(data, fucntion(){
+        $.each(data, function(){
             mtableContent += '<tr>';
-            mtableContent += '<td>' + this.id '</td>';
-            mtableContent += '<td>' + this.name '</td>';
-            mtableContent += '<td>' + this.rate '</td>';
+            mtableContent += '<td>' + this.id + '</td>';
+            mtableContent += '<td>' + this.name + '</td>';
+            mtableContent += '<td>' + this.rate + '</td>';
             mtableContent += '</tr>';
         });
         $('#mysqlRateList table tbody').html(mtableContent);
