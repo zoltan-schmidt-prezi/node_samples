@@ -13,17 +13,11 @@ $(document).ready(function() {
 // Functions =============================================================
 
 function getListItems() {
-    let promise = new Promise((resolve, reject) => {
         $.getJSON('/list', function( data ) {
             $.each(data, function(){
-                optionListData.push(this.name);
+                add_option("sel_name", this.name, this.id);
             });
-            resolve("success");
         });
-    });
-    promise.then((successMessage) => {
-        load_combo("sel_name", optionListData);
-    });
 }
 
 // Fill table with data
@@ -70,9 +64,11 @@ function load_combo(select_id, option_array) {
         add_option (select_id, option_array[i]);
     }
 }
-function add_option(select_id, text) {
+function add_option(select_id, text, id) {
     var select = document.getElementById(select_id);
     select.options[select.options.length] = new Option(text);
+    console.log(select.options[select.options.length].text)
+    //select.options[select.options.length].value = id;
 }
 
 function clear_combo(select_id) {
