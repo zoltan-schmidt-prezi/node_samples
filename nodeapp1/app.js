@@ -9,7 +9,8 @@ var mysql = require('mysql');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var ratesRouter = require('./routes/rates');
-var mysqlRatesRouter = require('./routes/mysqlrates')
+var mysqlRatesRouter = require('./routes/mysqlrates');
+var listRouter = require('./routes/list');
 
 var app = express();
 // database 
@@ -54,7 +55,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/rates', ratesRouter);
 app.use('/mysqlrates', mysqlRatesRouter);
-
+app.use('/list', listRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

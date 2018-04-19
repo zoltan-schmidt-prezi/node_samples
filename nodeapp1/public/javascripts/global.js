@@ -1,5 +1,5 @@
 // Rate data array for filling in info box
-var rateListData = [];
+var optionListData = [];
 
 // DOM Ready =============================================================
 $(document).ready(function() {
@@ -7,10 +7,24 @@ $(document).ready(function() {
     // Populate the user table on initial page load
     populateTable();
     populateMysqlTable();
-
+    getListItems();
 });
 
 // Functions =============================================================
+
+function getListItems() {
+    let promise = new Promise((resolve, reject) => {
+        $.getJSON('/list', function( data ) {
+            $.each(data, function(){
+                optionListData.push(this.name);
+            });
+            resolve("success");
+        });
+    });
+    promise.then((successMessage) => {
+        load_combo("sel_name", optionListData);
+    });
+}
 
 // Fill table with data
 function populateTable() {
@@ -50,3 +64,21 @@ function populateMysqlTable() {
         $('#mysqlRateList table tbody').html(mtableContent);
     });
 };
+
+function load_combo(select_id, option_array) {
+    for (var i = 0; i < option_array.length; i++) {
+        add_option (select_id, option_array[i]);
+    }
+}
+function add_option(select_id, text) {
+    var select = document.getElementById(select_id);
+    select.options[select.options.length] = new Option(text);
+}
+
+function clear_combo(select_id) {
+    var select = document.getElementById(select_id);
+    select.options.length = 0;
+}
+
+
+

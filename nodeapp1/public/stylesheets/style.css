@@ -81,3 +81,5 @@ fieldset {
 	border:0;
 	padding:0; margin:0;
 }
+
+a {color: black;margin: 5px; text-decoration: none;}
