@@ -7,12 +7,17 @@ $(document).ready(function() {
     // Populate the user table on initial page load
     populateTable();
     populateMysqlTable();
-    getListItems();
+    populateListItems();
+});
+
+$('#sel_name').change(function() {
+    console.log("mukodik");
+    console.log($(this).find('option:selected').attr('value'));
 });
 
 // Functions =============================================================
 
-function getListItems() {
+function populateListItems() {
         $.getJSON('/list', function( data ) {
             $.each(data, function(){
                 add_option("sel_name", this.name, this.id);
@@ -59,16 +64,9 @@ function populateMysqlTable() {
     });
 };
 
-function load_combo(select_id, option_array) {
-    for (var i = 0; i < option_array.length; i++) {
-        add_option (select_id, option_array[i]);
-    }
-}
 function add_option(select_id, text, id) {
     var select = document.getElementById(select_id);
-    select.options[select.options.length] = new Option(text);
-    console.log(select.options[select.options.length].text)
-    //select.options[select.options.length].value = id;
+    select.options[select.options.length] = new Option(text, id);
 }
 
 function clear_combo(select_id) {
