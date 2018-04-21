@@ -5,14 +5,13 @@ var optionListData = [];
 $(document).ready(function() {
 
     // Populate the user table on initial page load
-    populateTable();
-    populateMysqlTable();
+    //populateTable();
     populateListItems();
 });
 
 $('#sel_name').change(function() {
     console.log("mukodik");
-    console.log($(this).find('option:selected').attr('value'));
+    populateMysqlTable( $(this).find('option:selected').attr('value') );
 });
 
 // Functions =============================================================
@@ -26,7 +25,7 @@ function populateListItems() {
 }
 
 // Fill table with data
-function populateTable() {
+/*function populateTable() {
 
     // Empty content string
     var tableContent = '';
@@ -47,12 +46,13 @@ function populateTable() {
         // table
         $('#rateList table tbody').html(tableContent);
     });
-};
+};*/
 
-function populateMysqlTable() {
+function populateMysqlTable( bond_selected ) {
     var mtableContent = '';
+    console.log("selected bond: " + bond_selected);
 
-    $.getJSON( '/mysqlrates', function( data ) {
+    $.getJSON( '/mysqlrates/' + bond_selected, function( data ) {
         $.each(data, function(){
             mtableContent += '<tr>';
             mtableContent += '<td>' + this.id + '</td>';

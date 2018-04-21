@@ -21,7 +21,7 @@ router.get('/', function(req, res) {
         });
     });
     promise.then((successMessage) => {
-        console.log("promise: " + JSON.stringify(rawData));
+        //console.log("list promise: " + JSON.stringify(rawData));
         res.json(rawData);
     });
 });
