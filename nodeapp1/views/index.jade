@@ -7,18 +7,12 @@ block content
   //Wrapper
   #wrapper
 
-    //Rate list
-    h2 Exchange rate list - sqlite
-    #rateList
-        table
-            thead
-                th id
-                th Name
-                th Rate
-            tbody
-    // /Rate list
+    h3 Select bond
+        div
+            select(name='sel_name', id='sel_name') 
+                option(value='') 
     //MysqlRateList
-    h2 Exchange rate list - mysql
+    h2 Exchange rate list
     #mysqlRateList
         table
             thead
@@ -27,8 +21,4 @@ block content
                 th rate
             tbody
     // /mysql Rate list
-    h3 Dropdown test
-        div
-            select(name='sel_name', id='sel_name') 
-                option(value='') 
   // /Wrapper

@@ -16,31 +16,6 @@ a {
 	position:relative;
 }
 
-#rateList {
-	margin:0 0 30px 0;
-}
-	#rateList table {
-		border-collapse:separate;
-		border-spacing:1px;
-		background:#CCC;
-	}
-		#rateList table th {
-			background:#EEE;
-			font-weight:600;
-			padding:10px 20px;
-			text-align:center;
-		}
-		#rateList table tbody {
-			padding:0; margin:0;
-			border-collapse:collapse;
-			border-spacing:0px;
-		}
-			#rateList table td {
-				background:#FFF;
-				padding:5px 10px;
-				text-align:center;
-			}
-
 #mysqlRateList {
    margin:0 0 30px 0;
 }
@@ -65,17 +40,6 @@ a {
             padding:5px 10px;
             text-align:center;
          }
-
-#userInfo {
-	width:250px;
-	position:absolute;
-	top:0; left:0;
-}
-	#userInfo p {
-		padding:15px;
-		border:1px solid #CCC;
-		background:rgba(80,120,255,0.05);
-	}
 
 fieldset {
 	border:0;

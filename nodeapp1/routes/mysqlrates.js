@@ -12,7 +12,6 @@ router.get('/:selected', function(req, res) {
     var rawData = [];
 
     query = sql + req.params.selected
-    console.log("query: " + query);
 
     let promise = new Promise((resolve, reject) => {
         console.log("Connected!");
@@ -26,11 +25,8 @@ router.get('/:selected', function(req, res) {
         });
     });
     promise.then((successMessage) => {
-        //console.log("promise: " + JSON.stringify(rawData));
         res.json(rawData);
     });
-    //console.log("XXXXXXXXXXXXXXXX" + req.params.selected);
-    //res.send(req.params);
 });
 
 module.exports = router;

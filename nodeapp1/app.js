@@ -3,12 +3,9 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const sqlite3 = require('sqlite3').verbose();
 var mysql = require('mysql');
 
 var indexRouter = require('./routes/index');
-//var usersRouter = require('./routes/users');
-var ratesRouter = require('./routes/rates');
 var mysqlRatesRouter = require('./routes/mysqlrates');
 var listRouter = require('./routes/list');
 
@@ -22,14 +19,6 @@ let mysqldb = mysql.createConnection({
     database: "scraper_preprod"
 });
 
-/*let db = new sqlite3.Database('./data/scraper.db', sqlite3.OPEN_READWRITE, (err) => {
-    if (err) {
-        return console.error(err.message);
-    }
-    console.log('Connected to the file based SQlite database.');
-});*/
-
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -41,21 +30,15 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Make our db accessible to our router
-/*app.use(function(req,res,next){
-    req.db = db;
-    next();
-});*/
-
 app.use(function(req,res,next){
     req.mysqldb = mysqldb;
     next();
 });
 
 app.use('/', indexRouter);
-//app.use('/users', usersRouter);
-//app.use('/rates', ratesRouter);
 app.use('/mysqlrates/', mysqlRatesRouter);
 app.use('/list', listRouter);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
