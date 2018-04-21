@@ -4,6 +4,8 @@ $(document).ready(function() {
     // Populate the rate table on initial page load
     document.getElementById("tabletitle").textContent = "Rate table & charts";
     populateListItems();
+
+    renderChart();
 });
 
 // Dropdown selection change
@@ -31,8 +33,6 @@ function populateMysqlTable( bond_selected ) {
         $.each(data, function(){
             tableTitle = this.name;
             mtableContent += '<tr>';
-            //mtableContent += '<td>' + this.id + '</td>';
-            //mtableContent += '<td>' + this.name + '</td>';
             mtableContent += '<td>' + this.date + '</td>';
             mtableContent += '<td>' + this.rate + '</td>';
             mtableContent += '<td>' + this.currency + '</td>';
@@ -46,4 +46,45 @@ function populateMysqlTable( bond_selected ) {
 function add_option(select_id, text, id) {
     var select = document.getElementById(select_id);
     select.options[select.options.length] = new Option(text, id);
+}
+
+function renderChart(){
+var ctx = document.getElementById("myChart");
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+        datasets: [{
+            label: '# of Votes',
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+
 }
