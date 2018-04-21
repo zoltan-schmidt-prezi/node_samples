@@ -16,7 +16,8 @@ let mysqldb = mysql.createConnection({
     host: "scraperdb.c1mkc0degkxm.eu-central-1.rds.amazonaws.com",
     user: "scraper_admin",
     password: "scraper%admin",
-    database: "scraper_preprod"
+    //database: "scraper_preprod"
+    database: "scraper"
 });
 
 // view engine setup

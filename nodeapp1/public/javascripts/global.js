@@ -1,3 +1,6 @@
+var queryDataDate = new Array();
+var queryDataRate = new Array();
+
 // DOM Ready =============================================================
 $(document).ready(function() {
 
@@ -5,12 +8,12 @@ $(document).ready(function() {
     document.getElementById("tabletitle").textContent = "Rate table & charts";
     populateListItems();
 
-    renderChart();
 });
 
 // Dropdown selection change
 $('#sel_name').change(function() {
     populateMysqlTable( $(this).find('option:selected').attr('value') );
+    renderChart();
 });
 
 // Functions =============================================================
@@ -30,7 +33,13 @@ function populateMysqlTable( bond_selected ) {
     var tableTitle = '';
 
     $.getJSON( '/mysqlrates/' + bond_selected, function( data ) {
+        queryDataDate = [];
+        queryDataRate = [];
         $.each(data, function(){
+
+            queryDataDate.push(this.date);
+            queryDataRate.push(this.rate);
+
             tableTitle = this.name;
             mtableContent += '<tr>';
             mtableContent += '<td>' + this.date + '</td>';
@@ -49,28 +58,18 @@ function add_option(select_id, text, id) {
 }
 
 function renderChart(){
+
+console.log(queryDataDate);
+console.log(queryDataRate);
 var ctx = document.getElementById("myChart");
 var myChart = new Chart(ctx, {
-    type: 'bar',
+    type: 'line',
     data: {
-        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+        labels: queryDataDate,//[1500,1600,1700,1750,1800], //date
         datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
+            label: 'exchange rate',
+            data: queryDataRate,//[12, 19, 3, 5, 2, 3], //rate
             borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
                 'rgba(255, 159, 64, 1)'
             ],
             borderWidth: 1
@@ -80,7 +79,7 @@ var myChart = new Chart(ctx, {
         scales: {
             yAxes: [{
                 ticks: {
-                    beginAtZero:true
+                    beginAtZero:false
                 }
             }]
         }
