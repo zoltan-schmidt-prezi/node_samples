@@ -2,6 +2,7 @@
 $(document).ready(function() {
 
     // Populate the rate table on initial page load
+    document.getElementById("tabletitle").textContent = "Rate table & charts";
     populateListItems();
 });
 
@@ -15,6 +16,7 @@ $('#sel_name').change(function() {
 function populateListItems() {
         $.getJSON('/list', function( data ) {
             $.each(data, function(){
+                // Add dropdown list options with name and value
                 add_option("sel_name", this.name, this.id);
             });
         });
@@ -23,16 +25,21 @@ function populateListItems() {
 // Fill table with data
 function populateMysqlTable( bond_selected ) {
     var mtableContent = '';
+    var tableTitle = '';
 
     $.getJSON( '/mysqlrates/' + bond_selected, function( data ) {
         $.each(data, function(){
+            tableTitle = this.name;
             mtableContent += '<tr>';
-            mtableContent += '<td>' + this.id + '</td>';
-            mtableContent += '<td>' + this.name + '</td>';
+            //mtableContent += '<td>' + this.id + '</td>';
+            //mtableContent += '<td>' + this.name + '</td>';
+            mtableContent += '<td>' + this.date + '</td>';
             mtableContent += '<td>' + this.rate + '</td>';
+            mtableContent += '<td>' + this.currency + '</td>';
             mtableContent += '</tr>';
         });
         $('#mysqlRateList table tbody').html(mtableContent);
+        document.getElementById("tabletitle").textContent = "Rate table & charts for '" + tableTitle + "'";
     });
 };
 

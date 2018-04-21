@@ -1,8 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-//let sql = `SELECT * FROM main_exchange`;
-let sql = `select selector.id, selector.name, main_exchange.rate, selector.currency from main_exchange inner join selector on main_exchange.id=selector.id where selector.id=`;
+let sql = `select selector.id, selector.name, main_exchange.date, main_exchange.rate, selector.currency from main_exchange inner join selector on main_exchange.id=selector.id where selector.id=`;
 
 
 
