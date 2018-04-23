@@ -29,13 +29,13 @@ function populateListItems() {
         });
 }
 
-function getOneBondDataFromServer( bond_selected ) {
-    queryRateData = new Array();
+function getOneBondDataFromServer( bond_selected_ID ) {
+    queryRateSeriesData = [];
     let promise = new Promise((resolve, reject) => {
-        $.getJSON( 'mysqlrates/' + bond_selected, function( data ) {
+        $.getJSON( 'mysqlrates/' + bond_selected_ID, function( data ) {
             $.each(data, function(){
                 //get and store data
-                rateJSON = {
+                singleRateJSON = {
                     "id": this.id,
                     "name": this.name,
                     "date": this.date,
@@ -44,18 +44,26 @@ function getOneBondDataFromServer( bond_selected ) {
                     "currency": this.currency,
                     "sum": this.sum
                 };
-                queryRateData.push(rateJSON);
+                queryRateSeriesData.push(singleRateJSON);
             });
         });
         resolve("success");
     });
     promise.then((successMessage) => {
-        console.log(queryRateData);
-        return queryRateData;
+        console.log(queryRateSeriesData);
+        populateTable(queryRateSeriesData);
+        return queryRateSeriesData;
     });
 }
 
 // Fill table with data
+function populateTable( bond_selected_JSON_array ) {
+    console.log("poptable" + bond_selected_JSON_array);
+    for (i=0;i<bond_selected_JSON_array.length;i++) {
+       console.log(bond_selected_JSON_array[i]); 
+    }
+}
+
 function populateMysqlTable( bond_selected ) {
     var mtableContent = '';
     var tableTitle = '';
