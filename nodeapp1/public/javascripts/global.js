@@ -1,6 +1,8 @@
 var queryDataDate = new Array();
 var queryDataRate = new Array();
 
+console.log("console");
+
 // DOM Ready =============================================================
 $(document).ready(function() {
 
@@ -13,6 +15,7 @@ $(document).ready(function() {
 // Dropdown selection change
 $('#sel_name').change(function() {
     populateMysqlTable( $(this).find('option:selected').attr('value') );
+    x = getOneBondDataFromServer( $(this).find('option:selected').attr('value') );
 });
 
 // Functions =============================================================
@@ -26,7 +29,7 @@ function populateListItems() {
         });
 }
 
-function getOneBondDataFromServer() {
+function getOneBondDataFromServer( bond_selected ) {
     queryRateData = new Array();
     let promise = new Promise((resolve, reject) => {
         $.getJSON( 'mysqlrates/' + bond_selected, function( data ) {
@@ -47,6 +50,7 @@ function getOneBondDataFromServer() {
         resolve("success");
     });
     promise.then((successMessage) => {
+        console.log(queryRateData);
         return queryRateData;
     });
 }
