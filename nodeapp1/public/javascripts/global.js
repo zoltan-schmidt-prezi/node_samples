@@ -13,7 +13,6 @@ $(document).ready(function() {
 // Dropdown selection change
 $('#sel_name').change(function() {
     populateMysqlTable( $(this).find('option:selected').attr('value') );
-    renderChart();
 });
 
 // Functions =============================================================
@@ -27,14 +26,37 @@ function populateListItems() {
         });
 }
 
+function getOneBondDataFromServer() {
+    queryRateData = new Array();
+    let promise = new Promise((resolve, reject) => {
+        $.getJSON( 'mysqlrates/' + bond_selected, function( data ) {
+            $.each(data, function(){
+                //get and store data
+                rateJSON = {
+                    "id": this.id,
+                    "name": this.name,
+                    "date": this.date,
+                    "rate": this.rate,
+                    "updated": this.updated,
+                    "currency": this.currency,
+                    "sum": this.sum
+                };
+                queryRateData.push(rateJSON);
+            });
+        });
+        resolve("success");
+    });
+    promise.then((successMessage) => {
+        return queryRateData;
+    });
+}
+
 // Fill table with data
 function populateMysqlTable( bond_selected ) {
     var mtableContent = '';
     var tableTitle = '';
 
     $.getJSON( '/mysqlrates/' + bond_selected, function( data ) {
-        queryDataDate = [];
-        queryDataRate = [];
         $.each(data, function(){
 
             queryDataDate.push(this.date);
@@ -58,32 +80,33 @@ function add_option(select_id, text, id) {
 }
 
 function renderChart(){
-
-console.log(queryDataDate);
-console.log(queryDataRate);
-var ctx = document.getElementById("myChart");
-var myChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-        labels: queryDataDate,//[1500,1600,1700,1750,1800], //date
-        datasets: [{
-            label: 'exchange rate',
-            data: queryDataRate,//[12, 19, 3, 5, 2, 3], //rate
-            borderColor: [
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero:false
-                }
+    var ctx = document.getElementById("myChart");
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: queryDataDate, //date
+            datasets: [{
+                label: 'exchange rate',
+                data: queryDataRate, //rate
+                borderColor: [
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
             }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:false
+                    }
+                }]
+            }
         }
-    }
-});
+    });
+}
 
+function clearChartData() {
+    queryDataDate = [];
+    queryDataRate = [];
 }
