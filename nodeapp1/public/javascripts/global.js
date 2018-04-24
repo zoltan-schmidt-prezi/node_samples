@@ -14,8 +14,8 @@ $(document).ready(function() {
 
 // Dropdown selection change
 $('#sel_name').change(function() {
-    populateMysqlTable( $(this).find('option:selected').attr('value') );
-    x = getOneBondDataFromServer( $(this).find('option:selected').attr('value') );
+    //populateMysqlTable( $(this).find('option:selected').attr('value') );
+    getOneBondDataFromServer( $(this).find('option:selected').attr('value') );
 });
 
 // Functions =============================================================
@@ -46,11 +46,10 @@ function getOneBondDataFromServer( bond_selected_ID ) {
                 };
                 queryRateSeriesData.push(singleRateJSON);
             });
+            resolve("success");
         });
-        resolve("success");
     });
     promise.then((successMessage) => {
-        console.log(queryRateSeriesData);
         populateTable(queryRateSeriesData);
         return queryRateSeriesData;
     });
@@ -58,33 +57,26 @@ function getOneBondDataFromServer( bond_selected_ID ) {
 
 // Fill table with data
 function populateTable( bond_selected_JSON_array ) {
-    console.log("poptable" + bond_selected_JSON_array);
-    for (i=0;i<bond_selected_JSON_array.length;i++) {
-       console.log(bond_selected_JSON_array[i]); 
-    }
-}
-
-function populateMysqlTable( bond_selected ) {
     var mtableContent = '';
     var tableTitle = '';
+    
+    //Set table title only once
+    tableTitle = bond_selected_JSON_array[0].name;
+    document.getElementById("tabletitle").textContent = "Rate table & charts for '" + tableTitle + "'";
+    
+    //Fill table with data
+    for (i=0;i<bond_selected_JSON_array.length;i++) {
+        console.log(bond_selected_JSON_array[i].name); 
 
-    $.getJSON( '/mysqlrates/' + bond_selected, function( data ) {
-        $.each(data, function(){
-
-            queryDataDate.push(this.date);
-            queryDataRate.push(this.rate);
-
-            tableTitle = this.name;
-            mtableContent += '<tr>';
-            mtableContent += '<td>' + this.date + '</td>';
-            mtableContent += '<td>' + this.rate + '</td>';
-            mtableContent += '<td>' + this.currency + '</td>';
-            mtableContent += '</tr>';
-        });
-        $('#mysqlRateList table tbody').html(mtableContent);
-        document.getElementById("tabletitle").textContent = "Rate table & charts for '" + tableTitle + "'";
-    });
-};
+        mtableContent += '<tr>';
+        mtableContent += '<td>' + bond_selected_JSON_array[i].date + '</td>';
+        mtableContent += '<td>' + bond_selected_JSON_array[i].rate + '</td>';
+        mtableContent += '<td>' + bond_selected_JSON_array[i].currency + '</td>';
+        mtableContent += '</tr>';
+    }
+    $('#mysqlRateList table tbody').html(mtableContent);
+    console.log("table populated")
+}
 
 function add_option(select_id, text, id) {
     var select = document.getElementById(select_id);
