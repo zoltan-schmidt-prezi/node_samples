@@ -82,11 +82,9 @@ function add_option(select_id, text, id) {
 }
 
 function getDataset( bond_selected_JSON_array, dataType ){
-    let dataSet = [];
-    for (i=0;i<bond_selected_JSON_array.length;i++) {
-        dataSet.push(bond_selected_JSON_array[i][dataType]);
-    }
-    return dataSet;
+    return bond_selected_JSON_array.map( obj => {
+        return obj[dataType];
+    });
 }
 
 function renderChart(x_axis, y_axis){

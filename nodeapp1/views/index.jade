@@ -1,14 +1,14 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  #header
+    h1= title
 
   //Wrapper
   #wrapper
 
     h3 Select bond
-        div
+        #dropdown
             select(name='sel_name', id='sel_name') 
                 option(value='') 
     //MysqlRateList

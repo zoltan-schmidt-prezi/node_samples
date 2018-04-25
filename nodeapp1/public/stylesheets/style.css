@@ -1,14 +1,22 @@
 body {
-  padding: 30px;
+//  padding: 30px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  margin: 0 0 0 0;
 }
 
-h2 {
-	margin:0 0 .5em 0;
+h1 {
+    margin:0 0 0 0;
+    padding: 15px;
+    color: white;
 }
 
-a {
-  color: #00B7FF;
+#header {
+    background-color: lightblue;
+}
+select {
+    border-radius: 0px;
+    border-color: rgb(169, 169, 169);
+    background-color: lightblue;
 }
 
 #wrapper {
@@ -18,6 +26,7 @@ a {
 
 #mysqlRateList {
    margin:0 0 30px 0;
+   font-family:Verdana;
 }
    #mysqlRateList table {
       border-collapse:separate;
