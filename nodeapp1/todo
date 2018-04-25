@@ -1,4 +1,6 @@
 TODO
 
+add own data
+add authentication
 cors, sql injection
 consolidate routes> list, mysqlrates
