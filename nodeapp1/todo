@@ -1,5 +1,6 @@
 TODO
 
+turn into proper service
 add own data
 add authentication
 cors, sql injection
