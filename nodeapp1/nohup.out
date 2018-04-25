@@ -1,0 +1,148 @@
+
+> nodeapp1@0.0.0 start /home/ec2-user/node_samples/nodeapp1
+> node ./bin/www
+
+[0mGET / [36m304 [0m256.534 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m1.711 ms - -[0m
+[0mGET /javascripts/global.js [36m304 [0m0.394 ms - -[0m
+[0mGET /javascripts/Chart.js [36m304 [0m0.298 ms - -[0m
+Connected!
+[0mGET /list [32m200 [0m16.380 ms - 2394[0m
+Connected!
+[0mGET /mysqlrates/52767911 [32m200 [0m3.247 ms - 2065[0m
+Connected!
+[0mGET /mysqlrates/59236577 [32m200 [0m2.400 ms - 2017[0m
+Connected!
+[0mGET /mysqlrates/45707119 [32m200 [0m3.282 ms - 1903[0m
+Connected!
+[0mGET /mysqlrates/52767911 [36m304 [0m2.784 ms - -[0m
+events.js:183
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: Connection lost: The server closed the connection.
+    at Protocol.end (/home/ec2-user/node_samples/nodeapp1/node_modules/mysql/lib/protocol/Protocol.js:113:13)
+    at Socket.<anonymous> (/home/ec2-user/node_samples/nodeapp1/node_modules/mysql/lib/Connection.js:109:28)
+    at emitNone (events.js:111:20)
+    at Socket.emit (events.js:208:7)
+    at endReadableNT (_stream_readable.js:1064:12)
+    at _combinedTickCallback (internal/process/next_tick.js:138:11)
+    at process._tickCallback (internal/process/next_tick.js:180:9)
+npm ERR! code ELIFECYCLE
+npm ERR! errno 1
+npm ERR! nodeapp1@0.0.0 start: `node ./bin/www`
+npm ERR! Exit status 1
+npm ERR! 
+npm ERR! Failed at the nodeapp1@0.0.0 start script.
+npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
+
+npm ERR! A complete log of this run can be found in:
+npm ERR!     /home/ec2-user/.npm/_logs/2018-04-22T05_55_52_350Z-debug.log
+
+> nodeapp1@0.0.0 start /home/ec2-user/node_samples/nodeapp1
+> node ./bin/www
+
+[0mGET / [32m200 [0m259.096 ms - 780[0m
+[0mGET /stylesheets/style.css [32m200 [0m3.296 ms - 919[0m
+[0mGET /javascripts/global.js [32m200 [0m0.739 ms - 2537[0m
+[0mGET /javascripts/Chart.js [36m304 [0m1.057 ms - -[0m
+Connected!
+[0mGET /list [32m200 [0m23.603 ms - 2394[0m
+[0mGET / [32m200 [0m43.830 ms - 780[0m
+[0mGET /stylesheets/style.css [32m200 [0m0.866 ms - 919[0m
+[0mGET /javascripts/global.js [32m200 [0m0.946 ms - 2537[0m
+[0mGET /javascripts/Chart.js [32m200 [0m1.267 ms - 403941[0m
+Connected!
+[0mGET /list [32m200 [0m2.600 ms - 2394[0m
+[0mGET /favicon.ico [33m404 [0m14.566 ms - 1360[0m
+Connected!
+[0mGET /mysqlrates/52767911 [32m200 [0m3.144 ms - 2194[0m
+Connected!
+[0mGET /mysqlrates/57329316 [32m200 [0m2.401 ms - 2092[0m
+Connected!
+[0mGET /mysqlrates/97846771 [32m200 [0m2.326 ms - 2090[0m
+Connected!
+[0mGET /mysqlrates/45707119 [32m200 [0m2.246 ms - 2022[0m
+Connected!
+[0mGET /mysqlrates/42922169 [32m200 [0m2.348 ms - 2033[0m
+Connected!
+[0mGET /mysqlrates/45707119 [32m200 [0m2.366 ms - 2022[0m
+Connected!
+[0mGET /mysqlrates/52767911 [32m200 [0m2.473 ms - 2194[0m
+Connected!
+[0mGET /mysqlrates/45707119 [36m304 [0m2.520 ms - -[0m
+Connected!
+[0mGET /mysqlrates/62411556 [32m200 [0m3.052 ms - 2023[0m
+[0mGET / [32m200 [0m26.986 ms - 780[0m
+[0mGET /stylesheets/style.css [32m200 [0m0.451 ms - 919[0m
+[0mGET /javascripts/global.js [32m200 [0m0.359 ms - 2537[0m
+[0mGET /javascripts/Chart.js [32m200 [0m0.367 ms - 403941[0m
+Connected!
+[0mGET /list [32m200 [0m2.046 ms - 2394[0m
+Connected!
+[0mGET /mysqlrates/62411556 [32m200 [0m2.332 ms - 2023[0m
+Connected!
+[0mGET /mysqlrates/45707119 [32m200 [0m2.378 ms - 2022[0m
+[0mGET / [36m304 [0m43.520 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.435 ms - -[0m
+[0mGET /javascripts/global.js [36m304 [0m0.233 ms - -[0m
+[0mGET /javascripts/Chart.js [36m304 [0m0.238 ms - -[0m
+Connected!
+[0mGET /list [36m304 [0m1.982 ms - -[0m
+[0mGET /favicon.ico [33m404 [0m14.393 ms - 1360[0m
+Connected!
+[0mGET /mysqlrates/55486592 [32m200 [0m2.386 ms - 2191[0m
+Connected!
+[0mGET /mysqlrates/15101756 [32m200 [0m2.321 ms - 1919[0m
+Connected!
+[0mGET /mysqlrates/55486592 [36m304 [0m3.493 ms - -[0m
+[0mGET /mysqlrates/ [33m404 [0m10.242 ms - 1360[0m
+[0mGET /stylesheets/style.css [32m200 [0m0.444 ms - 919[0m
+[0mGET /javascripts/global.js [36m304 [0m0.366 ms - -[0m
+[0mGET /javascripts/Chart.js [36m304 [0m0.251 ms - -[0m
+[0mGET / [32m200 [0m35.912 ms - 780[0m
+[0mGET /javascripts/global.js [32m200 [0m0.486 ms - 2537[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.581 ms - -[0m
+[0mGET /javascripts/Chart.js [32m200 [0m0.823 ms - 403941[0m
+Connected!
+[0mGET /list [32m200 [0m3.516 ms - 2394[0m
+Connected!
+[0mGET /mysqlrates/52767911 [32m200 [0m2.372 ms - 2194[0m
+Connected!
+[0mGET /mysqlrates/59236577 [32m200 [0m2.345 ms - 2143[0m
+Connected!
+[0mGET /mysqlrates/52767911 [36m304 [0m2.349 ms - -[0m
+Connected!
+[0mGET /mysqlrates/59236577 [36m304 [0m2.478 ms - -[0m
+[0mGET / [32m200 [0m48.510 ms - 780[0m
+[0mGET /javascripts/global.js [32m200 [0m0.393 ms - 2537[0m
+[0mGET /stylesheets/style.css [32m200 [0m0.796 ms - 919[0m
+[0mGET /javascripts/Chart.js [32m200 [0m0.794 ms - 403941[0m
+Connected!
+[0mGET /list [32m200 [0m2.025 ms - 2394[0m
+Connected!
+[0mGET /mysqlrates/59236577 [32m200 [0m7.585 ms - 2143[0m
+Connected!
+[0mGET /mysqlrates/52767911 [32m200 [0m2.270 ms - 2194[0m
+events.js:183
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: Connection lost: The server closed the connection.
+    at Protocol.end (/home/ec2-user/node_samples/nodeapp1/node_modules/mysql/lib/protocol/Protocol.js:113:13)
+    at Socket.<anonymous> (/home/ec2-user/node_samples/nodeapp1/node_modules/mysql/lib/Connection.js:109:28)
+    at emitNone (events.js:111:20)
+    at Socket.emit (events.js:208:7)
+    at endReadableNT (_stream_readable.js:1064:12)
+    at _combinedTickCallback (internal/process/next_tick.js:138:11)
+    at process._tickCallback (internal/process/next_tick.js:180:9)
+npm ERR! code ELIFECYCLE
+npm ERR! errno 1
+npm ERR! nodeapp1@0.0.0 start: `node ./bin/www`
+npm ERR! Exit status 1
+npm ERR! 
+npm ERR! Failed at the nodeapp1@0.0.0 start script.
+npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
+
+npm ERR! A complete log of this run can be found in:
+npm ERR!     /home/ec2-user/.npm/_logs/2018-04-23T03_40_28_636Z-debug.log
