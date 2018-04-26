@@ -3,8 +3,10 @@
 $(document).ready(function() {
 
     // Populate the dropdown list on initial page load
+    hideContent("wrapper");
     document.getElementById("tabletitle").textContent = "Rate table & charts";
     populateListItems();
+
 });
 
 // Dropdown selection change
@@ -19,6 +21,7 @@ $('#sel_name').change(function() {
         //Generate chart on x=date, y=rate
         renderChart( getDataset(result, 'date'), getDataset(result, 'rate') );
     });
+    showContent("wrapper");
 });
 
 // Functions =============================================================
@@ -32,6 +35,15 @@ function populateListItems() {
     });
 }
 
+function showContent( content ) {
+    var x = document.getElementById( content );
+    x.style.display = "block";
+}
+
+function hideContent( content ) {
+    var x = document.getElementById( content );
+    x.style.display = "none";
+}
 // Get all data for one bond from Database
 function getOneBondDataFromServer( bond_selected_ID ) {
     queryRateSeriesData = [];
@@ -99,16 +111,34 @@ function renderChart(x_axis, y_axis){
                 borderColor: [
                     'rgba(255, 159, 64, 1)'
                 ],
-                borderWidth: 1
+                backgroundColor: 'rgba(255, 159, 64, 1)',
+                borderWidth: 1,
+                fill: false,
+                lineTension: 0
             }]
         },
         options: {
             scales: {
+                xAxes: [{
+                    type: 'time',
+                    time: {
+                        displayFormats: {
+                            year: 'YYYY'
+//                            day: 'MMM D'
+                        }
+                    }
+                }],
                 yAxes: [{
                     ticks: {
                         beginAtZero:false
                     }
                 }]
+            },
+            legend: {
+                display: true,
+                labels: {
+                    fontColor: 'rgb(100, 100, 100)',
+                }
             }
         }
     });

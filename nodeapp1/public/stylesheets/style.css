@@ -1,5 +1,8 @@
+:root{
+    --main-color: #66ccff
+}
+
 body {
-//  padding: 30px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   margin: 0 0 0 0;
 }
@@ -11,17 +14,28 @@ h1 {
 }
 
 #header {
-    background-color: lightblue;
+    background-color: var(--main-color);
 }
 select {
     border-radius: 0px;
     border-color: rgb(169, 169, 169);
-    background-color: lightblue;
+    background-color: var(--main-color);
+    color: white;
+    --text-shadow: 1px 1px #1a1a1a;
+}
+
+#dropdown_wrapper {
+    --padding-sides:112px;
+    padding-right: var(--padding-sides);
+    padding-left: var(--padding-sides);
+    position:relative;
 }
 
 #wrapper {
-	padding-left:112px;
-	position:relative;
+    --padding-sides:112px;
+    padding-right: var(--padding-sides);
+    padding-left: var(--padding-sides);
+    position:relative;
 }
 
 #mysqlRateList {

@@ -4,13 +4,15 @@ block content
   #header
     h1= title
 
-  //Wrapper
-  #wrapper
 
+  #dropdown_wrapper
     h3 Select bond
         #dropdown
             select(name='sel_name', id='sel_name') 
                 option(value='') 
+  //Wrapper
+  #wrapper
+    canvas#myChart(width='400', height='100')
     //MysqlRateList
     h3#tabletitle
     #mysqlRateList
@@ -21,5 +23,4 @@ block content
                 th currency
             tbody
     // /mysql Rate list
-    canvas#myChart(width='400', height='100')
   // /Wrapper

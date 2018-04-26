@@ -1,7 +1,11 @@
 TODO
 
-turn into proper service
+fix date in moment
 add own data
 add authentication
 cors, sql injection
 consolidate routes> list, mysqlrates
+
+DONE
+
+turn into proper service
