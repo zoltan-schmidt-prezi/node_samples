@@ -14,8 +14,8 @@ var app = express();
 
 let mysqldb = mysql.createConnection({
     host: "scraperdb.c1mkc0degkxm.eu-central-1.rds.amazonaws.com",
-    user: "scraper_admin",
-    password: "scraper%admin",
+    user: "reader",
+    password: "read%only%1A",
     //database: "scraper_preprod"
     database: "scraper"
 });
