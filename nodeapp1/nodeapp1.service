@@ -7,7 +7,7 @@ After=network.target
 [Service]
 Type=simple
 ExecStart=/usr/bin/node  app.js 
-WorkingDirectory=/home/ec2-user/node_samples/nodeapp1
+WorkingDirectory=/home/zoltan.schmidt.a/node_samples/nodeapp1
 Restart=on-failure
 
 LimitNOFILE=infinity

@@ -13,7 +13,7 @@ var app = express();
 // database 
 
 let mysqldb = mysql.createConnection({
-    host: "scraperdb.c1mkc0degkxm.eu-central-1.rds.amazonaws.com",
+    host: "35.205.186.100",
     user: "reader",
     password: "read%only%1A",
     //database: "scraper_preprod"
@@ -56,6 +56,6 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-app.listen(3001, () => console.log('App listening on port!'))
+app.listen(3000, () => console.log('App listening on port!'))
 
 module.exports = app;
