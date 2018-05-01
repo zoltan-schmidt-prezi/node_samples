@@ -14,7 +14,7 @@ router.get('/list', function(req, res) {
 
     let sql = `select selector.id, selector.name from selector`;
 
-    query_database( sql, req, res);
+    runQueryOnDatabase( sql, req, res);
 });
 
 /* GET rates from db. */
@@ -22,12 +22,20 @@ router.get('/rates/:selected', function(req, res) {
 
     let sql = `select selector.id, selector.name, main_exchange.date, main_exchange.rate, main_exchange.sum, main_exchange.updated, selector.currency from main_exchange inner join selector on main_exchange.id=selector.id where selector.id=`;
     
-    sql = sql + req.params.selected
+    sql = sql + req.params.selected;
 
-    query_database( sql, req, res);
+    runQueryOnDatabase( sql, req, res);
 });
 
-function query_database( query_string, req, res ){
+router.get('/portfolio/:selected', function(req, res) {
+    let sql = `select * from portfolio where id=`;
+
+    sql = sql + req.params.selected;
+
+    runQueryOnDatabase( sql, req, res);
+});
+
+function runQueryOnDatabase( query_string, req, res ){
     var mysqldb = req.mysqldb;
     var rawData = [];
 

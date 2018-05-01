@@ -19,7 +19,12 @@ $('#sel_name').change(function() {
         //populate the rate table on selection change
         populateTable(result);
         //Generate chart on x=date, y=rate
-        renderChart( getDataset(result, 'date'), getDataset(result, 'rate') );
+
+//TEST TEST TEST
+        getOnePortfolioDataFromServer( selected_option ).then( function(result_portf) {
+            var calc = calculateOnePortfolio( result, result_portf );
+            renderChart( getDataset(result, 'date'), getDataset(result, 'rate'), getDataset(calc, 'calculated') );
+        });
     });
     showContent("wrapper");
 });
@@ -69,6 +74,44 @@ function getOneBondDataFromServer( bond_selected_ID ) {
     return promise;
 }
 
+function getOnePortfolioDataFromServer( bond_selected_ID ) {
+    queryPortfolioSeriesData = [];
+    let promise = new Promise((resolve, reject) => {
+        $.getJSON( 'portfolio/' + bond_selected_ID, function( data ) {
+            $.each(data, function(){
+                //get and store data
+                singlePortfolioJSON = {
+                    "id": this.id,
+                    "buydate": this.buydate,
+                    "quantity": this.quantity,
+                    "costperbond": this.costperbond,
+                    "cost": this.cost
+                };
+                queryPortfolioSeriesData.push(singlePortfolioJSON);
+            });
+            resolve(queryPortfolioSeriesData);
+        });
+    });
+    return promise;
+   
+}
+
+function calculateOnePortfolio( rateData, portfolioData ){
+    var portfolioDataset = []
+    if (portfolioData.length == 0){
+       return portfolioDataset;
+    }
+    else {
+        for (i=0; i<rateData.length; i++){
+            if (portfolioData[0].buydate <= rateData[i].date){
+                portfolioDataset.push({"date": rateData[i].date, "calculated": portfolioData[0].quantity *
+    rateData[i].rate});
+            }
+        }
+        return portfolioDataset;
+    }
+}
+
 // Fill table with data
 function populateTable( bond_selected_JSON_array ) {
     let mtableContent = '';
@@ -100,19 +143,31 @@ function getDataset( bond_selected_JSON_array, dataType ){
     });
 }
 
-function renderChart(x_axis, y_axis){
+function renderChart(x_axis, y_axis, y_axis_2){
     var ctx = document.getElementById("myChart");
     var myChart = new Chart(ctx, {
         type: 'line',
         data: {
             labels: x_axis, //date
             datasets: [{
-                label: 'exchange rate',
+                label: 'Exchange rate',
+                yAxisID: 'A',
                 data: y_axis, //rate
                 borderColor: [
                     'rgba(255, 159, 64, 1)'
                 ],
                 backgroundColor: 'rgba(255, 159, 64, 1)',
+                borderWidth: 1,
+                fill: false,
+                lineTension: 0
+            }, {
+                label: 'Portfolio',
+                yAxisID: 'B',
+                data: y_axis_2, //portfolio
+                borderColor: [
+                'rgba(178, 9, 164, 1)'
+                ],
+                backgroundColor: 'rgba(178, 9, 164, 1)',
                 borderWidth: 1,
                 fill: false,
                 lineTension: 0
@@ -130,9 +185,14 @@ function renderChart(x_axis, y_axis){
                     }
                 }],
                 yAxes: [{
+                    id: 'A',
                     ticks: {
                         beginAtZero:false
-                    }
+                    },
+                    position: 'left'
+                },{
+                    id: 'B',
+                    position: 'right'
                 }]
             },
             legend: {
