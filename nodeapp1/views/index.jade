@@ -3,24 +3,34 @@ extends layout
 block content
   #header
     h1= title
-
-
-  #dropdown_wrapper
-    h3 Select bond
-        #dropdown
-            select(name='sel_name', id='sel_name') 
-                option(value='') 
-  //Wrapper
-  #wrapper
-    canvas#myChart(width='400', height='100')
-    //MysqlRateList
-    h3#tabletitle
-    #mysqlRateList
-        table
-            thead
-                th date
-                th rate
-                th currency
-            tbody
-    // /mysql Rate list
-  // /Wrapper
+  body
+    button#defaultOpen.tablink(onclick="openPage('ERV', this, 'orange')") Exchange Rates
+    button.tablink(onclick="openPage('Portfolio', this, 'orange')") Portfolio
+    button.tablink(onclick="openPage('Manage', this, 'orange')") Admin
+    #ERV.tabcontent
+      #dropdown_wrapper
+        h3 Select bond
+            #dropdown
+                select(name='sel_name', id='sel_name') 
+                    option(value='') 
+      //Wrapper
+      #wrapper
+        canvas#myChart(width='400', height='100')
+        //MysqlRateList
+        h3#tabletitle
+        #mysqlRateList
+            table
+                thead
+                    th date
+                    th rate
+                    th currency
+                tbody
+        // /mysql Rate list
+      // /Wrapper
+      p Some news this fine day!
+    #Portfolio.tabcontent
+      h3 Portfolio
+      p Get in touch, or swing by for a cup of coffee.
+    #Manage.tabcontent
+      h3 Management View
+      p Who we are and what we do.
