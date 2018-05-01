@@ -49,7 +49,7 @@ function hideContent( content ) {
 function getOneBondDataFromServer( bond_selected_ID ) {
     queryRateSeriesData = [];
     let promise = new Promise((resolve, reject) => {
-        $.getJSON( 'mysqlrates/' + bond_selected_ID, function( data ) {
+        $.getJSON( 'rates/' + bond_selected_ID, function( data ) {
             $.each(data, function(){
                 //get and store data
                 singleRateJSON = {

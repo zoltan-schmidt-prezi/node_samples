@@ -6,8 +6,6 @@ var logger = require('morgan');
 var mysql = require('mysql');
 
 var indexRouter = require('./routes/index');
-var mysqlRatesRouter = require('./routes/mysqlrates');
-var listRouter = require('./routes/list');
 
 var app = express();
 // database 
@@ -37,8 +35,6 @@ app.use(function(req,res,next){
 });
 
 app.use('/', indexRouter);
-app.use('/mysqlrates/', mysqlRatesRouter);
-app.use('/list', listRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -56,6 +52,6 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-app.listen(3000, () => console.log('App listening on port!'))
+//app.listen(3000, () => console.log('App listening on port!'))
 
 module.exports = app;
