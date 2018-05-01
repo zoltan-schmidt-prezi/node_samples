@@ -1,5 +1,9 @@
 TODO
 
+- only one dataset per bond
+- mouseover glitches, probably rendering issue
+- render triggering is a mess
+
 fix date in moment
 add own data
 add authentication
