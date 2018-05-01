@@ -25,7 +25,7 @@ select {
     --text-shadow: 1px 1px #1a1a1a;
 }
 
-#dropdown_wrapper {
+/*#dropdown_wrapper {
     --padding-sides:112px;
     padding-right: var(--padding-sides);
     padding-left: var(--padding-sides);
@@ -37,7 +37,7 @@ select {
     padding-right: var(--padding-sides);
     padding-left: var(--padding-sides);
     position:relative;
-}
+}*/
 
 #mysqlRateList {
    margin:0 0 30px 0;
@@ -66,8 +66,9 @@ select {
          }
 
 fieldset {
-	border:0;
-	padding:0; margin:0;
+  border:0;
+  padding:0; 
+  margin:0;
 }
 
 a {color: black;margin: 5px; text-decoration: none;}

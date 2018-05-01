@@ -31,6 +31,7 @@ function populateListItems() {
         $.each(data, function(){
             // Add dropdown list options with name and value
             add_option("sel_name", this.name, this.id);
+            add_option("sel_portf", this.name, this.id);
         });
     });
 }

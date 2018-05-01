@@ -8,6 +8,7 @@ block content
     button.tablink(onclick="openPage('Portfolio', this, 'orange')") Portfolio
     button.tablink(onclick="openPage('Manage', this, 'orange')") Admin
     #ERV.tabcontent
+      h3 Exchange Rates
       #dropdown_wrapper
         h3 Select bond
             #dropdown
@@ -30,6 +31,11 @@ block content
       p Some news this fine day!
     #Portfolio.tabcontent
       h3 Portfolio
+       #dropdown_wrapper
+        h3 Select bond
+            #dropdown
+                select(name='sel_portf', id='sel_portf') 
+                    option(value='') 
       p Get in touch, or swing by for a cup of coffee.
     #Manage.tabcontent
       h3 Management View
