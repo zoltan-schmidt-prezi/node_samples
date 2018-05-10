@@ -37,23 +37,25 @@ $('#sel_name').change(function() {
                 fill: false,
                 lineTension: 0
             }
-            var portfolioDataset = {
-                label: 'Portfolio',
-                yAxisID: 'B',
-                data: getDataset(calc, 'calculated'), //portfolio
-                borderColor: [
-                'rgba(178, 9, 164, 1)'
-                ],
-                backgroundColor: 'rgba(178, 9, 164, 1)',
-                borderWidth: 1,
-                fill: false,
-                lineTension: 0
-            }
-
             chartResetData(chart);
             chartAddLabel(chart, getDataset(result, 'date'));
             chartAddDataset(chart, rateDataset);
-            chartAddDataset(chart, portfolioDataset);
+            for (i=0; i<calc.length; i++){
+                var portfolioDataset = {
+                    label: 'Portfolio',
+                    yAxisID: 'B',
+                    data: getDataset(calc[i], 'calculated'), //portfolio
+                    borderColor: [
+                    'rgba(178, 9, 164, 1)'
+                    ],
+                    backgroundColor: 'rgba(178, 9, 164, 1)',
+                    borderWidth: 1,
+                    fill: false,
+                    lineTension: 0
+                }
+                chartAddDataset(chart, portfolioDataset);
+            }
+
         });
     });
     showContent("wrapper");
@@ -120,6 +122,7 @@ function getOnePortfolioDataFromServer( bond_selected_ID ) {
                 queryPortfolioSeriesData.push(singlePortfolioJSON);
             });
             resolve(queryPortfolioSeriesData);
+            console.log(queryPortfolioSeriesData)
         });
     });
     return promise;
@@ -127,16 +130,22 @@ function getOnePortfolioDataFromServer( bond_selected_ID ) {
 
 function calculateOnePortfolio( rateData, portfolioData ){
     var portfolioDataset = []
+    var singlePortfolioDataset = []
     if (portfolioData.length == 0){
        return portfolioDataset;
     }
     else {
-        for (i=0; i<rateData.length; i++){
-            if (portfolioData[0].buydate <= rateData[i].date){
-                portfolioDataset.push({"date": rateData[i].date, "calculated": portfolioData[0].quantity *
-    rateData[i].rate});
+        // Iterate over all every portfolio item for a single bond
+        for (pf=0; pf<portfolioData.length; pf++){
+            //Calculate value for every date after buydate
+            for (i=0; i<rateData.length; i++){
+                if (portfolioData[pf].buydate <= rateData[i].date){
+                    singlePortfolioDataset.push({"date": rateData[i].date, "calculated": portfolioData[pf].quantity * rateData[i].rate});
+                }
             }
+            portfolioDataset.push(singlePortfolioDataset);
         }
+        console.log(portfolioDataset);
         return portfolioDataset;
     }
 }
