@@ -1,3 +1,4 @@
+var chart;
 
 // DOM Ready =============================================================
 $(document).ready(function() {
@@ -6,7 +7,8 @@ $(document).ready(function() {
     hideContent("wrapper");
     document.getElementById("tabletitle").textContent = "Rate table & charts";
     populateListItems();
-
+    var ctx = document.getElementById("myChart");
+    chart = chartInit(ctx);
 });
 
 // Dropdown selection change
@@ -23,7 +25,35 @@ $('#sel_name').change(function() {
 //TEST TEST TEST
         getOnePortfolioDataFromServer( selected_option ).then( function(result_portf) {
             var calc = calculateOnePortfolio( result, result_portf );
-            renderChart( getDataset(result, 'date'), getDataset(result, 'rate'), getDataset(calc, 'calculated') );
+            var rateDataset = {
+                label: 'Exchange rate',
+                yAxisID: 'A',
+                data:  getDataset(result, 'rate'), //rate
+                borderColor: [
+                    'rgba(255, 159, 64, 1)'
+                ],
+                backgroundColor: 'rgba(255, 159, 64, 1)',
+                borderWidth: 1,
+                fill: false,
+                lineTension: 0
+            }
+            var portfolioDataset = {
+                label: 'Portfolio',
+                yAxisID: 'B',
+                data: getDataset(calc, 'calculated'), //portfolio
+                borderColor: [
+                'rgba(178, 9, 164, 1)'
+                ],
+                backgroundColor: 'rgba(178, 9, 164, 1)',
+                borderWidth: 1,
+                fill: false,
+                lineTension: 0
+            }
+
+            chartResetData(chart);
+            chartAddLabel(chart, getDataset(result, 'date'));
+            chartAddDataset(chart, rateDataset);
+            chartAddDataset(chart, portfolioDataset);
         });
     });
     showContent("wrapper");
@@ -93,7 +123,6 @@ function getOnePortfolioDataFromServer( bond_selected_ID ) {
         });
     });
     return promise;
-   
 }
 
 function calculateOnePortfolio( rateData, portfolioData ){
@@ -142,66 +171,3 @@ function getDataset( bond_selected_JSON_array, dataType ){
         return obj[dataType];
     });
 }
-
-function renderChart(x_axis, y_axis, y_axis_2){
-    var ctx = document.getElementById("myChart");
-    var myChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: x_axis, //date
-            datasets: [{
-                label: 'Exchange rate',
-                yAxisID: 'A',
-                data: y_axis, //rate
-                borderColor: [
-                    'rgba(255, 159, 64, 1)'
-                ],
-                backgroundColor: 'rgba(255, 159, 64, 1)',
-                borderWidth: 1,
-                fill: false,
-                lineTension: 0
-            }, {
-                label: 'Portfolio',
-                yAxisID: 'B',
-                data: y_axis_2, //portfolio
-                borderColor: [
-                'rgba(178, 9, 164, 1)'
-                ],
-                backgroundColor: 'rgba(178, 9, 164, 1)',
-                borderWidth: 1,
-                fill: false,
-                lineTension: 0
-            }]
-        },
-        options: {
-            scales: {
-                xAxes: [{
-                    type: 'time',
-                    time: {
-                        displayFormats: {
-                            year: 'YYYY'
-//                            day: 'MMM D'
-                        }
-                    }
-                }],
-                yAxes: [{
-                    id: 'A',
-                    ticks: {
-                        beginAtZero:false
-                    },
-                    position: 'left'
-                },{
-                    id: 'B',
-                    position: 'right'
-                }]
-            },
-            legend: {
-                display: true,
-                labels: {
-                    fontColor: 'rgb(100, 100, 100)',
-                }
-            }
-        }
-    });
-}
-
