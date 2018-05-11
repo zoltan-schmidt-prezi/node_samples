@@ -29,7 +29,7 @@ $(document).ready(function() {
         chartSetTitle(charts_portf[i], "Please select a bond");
     }
 
-    //populateFullPortfolio();
+    populateFullPortfolio();
 });
 
 // Dropdown selection change
@@ -49,7 +49,7 @@ $('#sel_name').change(function() {
 
         var rateDataset = {
             label: 'Exchange rate',
-            yAxisID: 'A',
+            yAxisID: 'B',
             data:  getDataset(result, 'rate'), //rate
             borderColor: [
                 'rgba(255, 159, 64, 1)'
@@ -81,8 +81,7 @@ function populateListItems() {
 function populateFullPortfolio() {
     $.getJSON('/list', function( data ) {
         $.each(data, function(){
-            loadPortfolioItem(this.id);
-            console.log(this.id);
+            loadPortfolioItem(this.id, this.name);
         });
     });
 }
@@ -98,9 +97,9 @@ function hideContent( content ) {
 }
 // Get all data for one bond from Database
 function getOneBondDataFromServer( bond_selected_ID ) {
-    queryRateSeriesData = [];
     let promise = new Promise((resolve, reject) => {
         $.getJSON( 'rates/' + bond_selected_ID, function( data ) {
+            queryRateSeriesData = [];
             $.each(data, function(){
                 //get and store data
                 singleRateJSON = {
@@ -121,9 +120,9 @@ function getOneBondDataFromServer( bond_selected_ID ) {
 }
 
 function getOnePortfolioDataFromServer( bond_selected_ID ) {
-    queryPortfolioSeriesData = [];
     let promise = new Promise((resolve, reject) => {
         $.getJSON( 'portfolio/' + bond_selected_ID, function( data ) {
+            queryPortfolioSeriesData = [];
             $.each(data, function(){
                 //get and store data
                 singlePortfolioJSON = {

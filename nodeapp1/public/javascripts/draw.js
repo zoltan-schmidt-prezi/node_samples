@@ -21,7 +21,8 @@ function chartInit(ctx){
                     ticks: {
                         beginAtZero:false
                     },
-                    position: 'left'
+                    position: 'left',
+		    display: false
                 },{
                     id: 'B',
                     position: 'right'
@@ -58,7 +59,16 @@ function chartAddDataset(chart, data) {
 }
 
 function chartUpdateStacked(chart) {
-    chart.options.scales.yAxes.stacked = 'true';
+    chart.options.scales.yAxes[1].stacked = 'true';
+    chart.update();
+}
+
+function chartRandomColor() {
+    let r = Math.floor(Math.random() * 255);
+    let b = Math.floor(Math.random() * 255);
+    let g = Math.floor(Math.random() * 255);
+    color = 'rgb(' + r + ',' + b + ',' + g + ')';
+    return color;
 }
 
 function chartResetData(chart) {
