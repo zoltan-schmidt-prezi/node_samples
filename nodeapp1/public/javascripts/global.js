@@ -1,4 +1,7 @@
 var chart;
+var chart_full;
+var charts_portf = [];
+
 
 // DOM Ready =============================================================
 $(document).ready(function() {
@@ -7,8 +10,26 @@ $(document).ready(function() {
     hideContent("wrapper");
     document.getElementById("tabletitle").textContent = "Rate table & charts";
     populateListItems();
+
+    // Init exchange charts on page
     var ctx = document.getElementById("myChart");
     chart = chartInit(ctx);
+    chartSetTitle(chart, "Please select a bond");
+
+    //Init full portfolio chart
+    var ctx_full = document.getElementById("myPortfolio");
+    chart_full = chartInit(ctx_full);
+    chartSetTitle(chart_full, "Complete portfolio");
+    chartUpdateStacked(chart_full);    
+    //Init 5 portf charts
+    var ctx_portf_arr = [];
+    for(i=0; i<5; i++){
+        ctx_portf_arr.push(document.getElementById("myPortfolio"+i));
+        charts_portf.push(chartInit(ctx_portf_arr[i]));
+        chartSetTitle(charts_portf[i], "Please select a bond");
+    }
+
+    //populateFullPortfolio();
 });
 
 // Dropdown selection change
@@ -26,41 +47,21 @@ $('#sel_name').change(function() {
         populateTable(result);
         //Generate chart on x=date, y=rate
 
-//TEST TEST TEST
-        getOnePortfolioDataFromServer( selected_option ).then( function(result_portf) {
-            var calc = calculateOnePortfolio( result, result_portf );
-            var rateDataset = {
-                label: 'Exchange rate',
-                yAxisID: 'A',
-                data:  getDataset(result, 'rate'), //rate
-                borderColor: [
-                    'rgba(255, 159, 64, 1)'
-                ],
-                backgroundColor: 'rgba(255, 159, 64, 1)',
-                borderWidth: 1,
-                fill: false,
-                lineTension: 0
-            }
-            chartResetData(chart);
-            chartAddLabel(chart, getDataset(result, 'date'));
-            chartAddDataset(chart, rateDataset);
-            for (i=0; i<calc.length; i++){
-                var portfolioDataset = {
-                    label: 'Portfolio ' + (i + 1),
-                    yAxisID: 'B',
-                    data: getDataset(calc[i], 'calculated'), //portfolio
-                    borderColor: [
-                    'rgba(178, 9, 164, 1)'
-                    ],
-                    backgroundColor: 'rgba(178, 9, 164, 1)',
-                    borderWidth: 1,
-                    fill: false,
-                    lineTension: 0
-                }
-                chartAddDataset(chart, portfolioDataset);
-            }
-
-        });
+        var rateDataset = {
+            label: 'Exchange rate',
+            yAxisID: 'A',
+            data:  getDataset(result, 'rate'), //rate
+            borderColor: [
+                'rgba(255, 159, 64, 1)'
+            ],
+            backgroundColor: 'rgba(255, 159, 64, 1)',
+            borderWidth: 1,
+            fill: false,
+            lineTension: 0
+        }
+        chartResetData(chart);
+        chartAddLabel(chart, getDataset(result, 'date'));
+        chartAddDataset(chart, rateDataset);
     });
     showContent("wrapper");
 });
@@ -73,6 +74,15 @@ function populateListItems() {
             // Add dropdown list options with name and value
             add_option("sel_name", this.name, this.id);
             add_option("sel_portf", this.name, this.id);
+        });
+    });
+}
+
+function populateFullPortfolio() {
+    $.getJSON('/list', function( data ) {
+        $.each(data, function(){
+            loadPortfolioItem(this.id);
+            console.log(this.id);
         });
     });
 }
@@ -126,7 +136,6 @@ function getOnePortfolioDataFromServer( bond_selected_ID ) {
                 queryPortfolioSeriesData.push(singlePortfolioJSON);
             });
             resolve(queryPortfolioSeriesData);
-            console.log(queryPortfolioSeriesData)
         });
     });
     return promise;
@@ -153,7 +162,6 @@ function calculateOnePortfolio( rateData, portfolioData ){
             portfolioDataset.push(singlePortfolioDataset);
             singlePortfolioDataset = [];
         }
-        console.log(portfolioDataset);
         return portfolioDataset;
     }
 }

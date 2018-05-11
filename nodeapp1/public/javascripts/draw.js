@@ -29,8 +29,10 @@ function chartInit(ctx){
             },
             legend: {
                 display: true,
+                position: 'bottom',
                 labels: {
                     fontColor: 'rgb(100, 100, 100)',
+                    usePointStyle: true
                 }
             }
         }
@@ -53,6 +55,10 @@ function chartAddLabel(chart, label) {
 function chartAddDataset(chart, data) {
     chart.data.datasets.push(data);
     chart.update();
+}
+
+function chartUpdateStacked(chart) {
+    chart.options.scales.yAxes.stacked = 'true';
 }
 
 function chartResetData(chart) {
