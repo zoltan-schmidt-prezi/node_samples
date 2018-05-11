@@ -139,11 +139,15 @@ function calculateOnePortfolio( rateData, portfolioData ){
         for (pf=0; pf<portfolioData.length; pf++){
             //Calculate value for every date after buydate
             for (i=0; i<rateData.length; i++){
-                if (portfolioData[pf].buydate <= rateData[i].date){
+                if (portfolioData[pf].buydate > rateData[i].date){
+                    singlePortfolioDataset.push({"date": rateData[i].date, "calcualted": null});
+                }
+                else {
                     singlePortfolioDataset.push({"date": rateData[i].date, "calculated": portfolioData[pf].quantity * rateData[i].rate});
                 }
             }
             portfolioDataset.push(singlePortfolioDataset);
+            singlePortfolioDataset = [];
         }
         console.log(portfolioDataset);
         return portfolioDataset;
