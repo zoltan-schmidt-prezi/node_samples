@@ -16,6 +16,10 @@ $('#sel_name').change(function() {
     //Get the id of the selected bond in the dropdown
     let selected_option =  $(this).find('option:selected').attr('value');
 
+    //Get the name of the selected bond in the dropdown
+    let selected_name = $(this).find('option:selected').text();
+    chartSetTitle(chart, selected_name);
+    
     //Get all the data related to the selected bond
     getOneBondDataFromServer( selected_option ).then( function(result) {
         //populate the rate table on selection change
@@ -42,7 +46,7 @@ $('#sel_name').change(function() {
             chartAddDataset(chart, rateDataset);
             for (i=0; i<calc.length; i++){
                 var portfolioDataset = {
-                    label: 'Portfolio',
+                    label: 'Portfolio ' + (i + 1),
                     yAxisID: 'B',
                     data: getDataset(calc[i], 'calculated'), //portfolio
                     borderColor: [

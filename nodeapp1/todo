@@ -1,15 +1,16 @@
 TODO
 
-- only one dataset per bond
-- render triggering is a mess
+separate chart for portfolios > too big diff in size to small in value change
 
 fix date in moment
-add own data
 add authentication
 cors, sql injection
 
 DONE
 
+- render triggering is a mess
+add own data
+- only one dataset per bond
 turn into proper service
 - mouseover glitches, probably rendering issue
 consolidate routes> list, mysqlrates

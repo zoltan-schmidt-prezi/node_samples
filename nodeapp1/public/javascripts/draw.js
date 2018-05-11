@@ -40,6 +40,12 @@ function chartInit(ctx){
     return ratesChart;
 }
 
+function chartSetTitle(chart, title) {
+    chart.options.title.display = 'true';
+    chart.options.title.text = title;
+    chart.update();
+}
+
 function chartAddLabel(chart, label) {
     chart.data.labels = label;
 }
