@@ -35,6 +35,11 @@ router.get('/portfolio/:selected', function(req, res) {
     runQueryOnDatabase( sql, req, res);
 });
 
+router.get('/count', function(req, res) {
+    let sql = `select count(distinct buydate) from portfolio`;
+    runQueryOnDatabase( sql, req, res);
+});
+
 function runQueryOnDatabase( query_string, req, res ){
     var mysqldb = req.mysqldb;
     var rawData = [];

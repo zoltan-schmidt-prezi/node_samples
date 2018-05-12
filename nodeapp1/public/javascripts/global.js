@@ -29,7 +29,11 @@ $(document).ready(function() {
         chartSetTitle(charts_portf[i], "Please select a bond");
     }
 
-    populateFullPortfolio();
+    getPortfolioCount().then( function(count) {
+        populateFullPortfolio(count).then( function(collection){
+            addPortfolioCollection(collection, count);
+        });
+    });
 });
 
 // Dropdown selection change
@@ -78,12 +82,43 @@ function populateListItems() {
     });
 }
 
-function populateFullPortfolio() {
-    $.getJSON('/list', function( data ) {
-        $.each(data, function(){
-            loadPortfolioItem(this.id, this.name);
+function populateFullPortfolio(count) {
+    //Create multi array for portfolio ordered by date
+    let promise = new Promise((resolve, reject) => {
+        let portfolioCollection = [];
+        for (i=0;i<count;i++){
+            portfolioCollection[i] = [];
+        }
+        $.getJSON('/list', function( data ) {
+            $.each(data, function(){
+                loadPortfolioItem(this.id, this.name, portfolioCollection);
+            });
+            resolve(portfolioCollection);
         });
     });
+    return promise;
+}
+
+function addPortfolioCollection(collection, count){
+    console.log(collection[0].length);
+    for (i=0;i<count;i++){
+        console.log(collection[i]);
+        for(j=0;j<collection[i].length;j++){
+            console.log(collection[i][j]);
+            chartAddDataset(chart_full, collection[i][j]);
+        }
+    }
+}
+
+function getPortfolioCount() {
+    let promise = new Promise((resolve, reject) => {
+        $.getJSON('/count', function( data) {
+            $.each(data, function(){
+                resolve(this["count(distinct buydate)"]);
+            });
+        });
+    });
+    return promise;
 }
 
 function showContent( content ) {

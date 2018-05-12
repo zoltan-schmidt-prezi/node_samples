@@ -1,6 +1,6 @@
 
 // Dropdown selection change
-function loadPortfolioItem(selected_option, selected_name) {
+function loadPortfolioItem(selected_option, selected_name, portfolioCollection) {
     color = [chartRandomColor(), chartRandomColor()];
     //Get all the data related to the selected bond
     getOneBondDataFromServer( selected_option ).then( function(result) {
@@ -8,7 +8,7 @@ function loadPortfolioItem(selected_option, selected_name) {
         getOnePortfolioDataFromServer( selected_option ).then( function(result_portf) {
             var calc = calculateOnePortfolio( result, result_portf );
             for (i=0; i<calc.length; i++){
-                console.log( getDataset(calc[i], 'calculated') );
+                //console.log( getDataset(calc[i], 'calculated') );
                 var portfolioDataset = {
                     label: (selected_name + " " + (i+1)),
                     yAxisID: 'B',
@@ -22,7 +22,7 @@ function loadPortfolioItem(selected_option, selected_name) {
                     fill: false,
                     lineTension: 0
                 }
-                chartAddDataset(chart_full, portfolioDataset);
+                portfolioCollection[i].push(portfolioDataset);
             }
         });
     });

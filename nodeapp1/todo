@@ -3,8 +3,6 @@ TODO
 separate common functions and page functions
 fix hardcoded chart number (5)
 put charts on one page eventually?
-second page could be sum of portfolios
- -> stack bond portfolios?
 third page can be tabular data
 
 draw baselines instead of portfolios on exchange rate charts
@@ -15,6 +13,8 @@ cors, sql injection
 
 DONE
 
+second page could be sum of portfolios
+ -> stack bond portfolios?
 separate chart and table for portfolios on portf page > too big diff in size to small in value change
 - render triggering is a mess
 add own data
