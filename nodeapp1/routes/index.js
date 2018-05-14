@@ -10,9 +10,18 @@ router.get('/', function(req, res, next) {
 /* GET rates from db. */
 router.get('/list', function(req, res) {
     var mysqldb = req.mysqldb;
-    var rawData = [];
 
     let sql = `select selector.id, selector.name from selector`;
+
+    runQueryOnDatabase( sql, req, res);
+});
+
+/* GET ids from db for a given portfolio. */
+router.get('/list/:date', function(req, res) {
+    var mysqldb = req.mysqldb;
+
+    let sql = `select * from portfolio where buydate=`;
+    sql = sql + '\'' + req.params.date + '\'';
 
     runQueryOnDatabase( sql, req, res);
 });
@@ -36,7 +45,7 @@ router.get('/portfolio/:selected', function(req, res) {
 });
 
 router.get('/count', function(req, res) {
-    let sql = `select count(distinct buydate) from portfolio`;
+    let sql = `select distinct buydate from portfolio`;
     runQueryOnDatabase( sql, req, res);
 });
 
@@ -58,7 +67,10 @@ function runQueryOnDatabase( query_string, req, res ){
     promise.then((successMessage) => {
         //console.log("list promise: " + JSON.stringify(rawData));
         res.json(rawData);
+    }).catch((reason) => {
+        console.log('Handle rejected promise: ' + reason); 
     });
+    
    
 }
 

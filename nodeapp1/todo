@@ -1,10 +1,15 @@
 TODO
 
+FIX calculaiton on full portf
+RETURN ONLY A JSON OBJECT FROM THE HTTP REQUEST
+proper variable and function names
 separate common functions and page functions
 fix hardcoded chart number (5)
 put charts on one page eventually?
 third page can be tabular data
 
+add historic data
+add date selector
 draw baselines instead of portfolios on exchange rate charts
 
 fix date in moment

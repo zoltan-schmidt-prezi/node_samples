@@ -28,11 +28,11 @@ $(document).ready(function() {
         charts_portf.push(chartInit(ctx_portf_arr[i]));
         chartSetTitle(charts_portf[i], "Please select a bond");
     }
-
-    getPortfolioCount().then( function(count) {
-        populateFullPortfolio(count).then( function(collection){
-            addPortfolioCollection(collection, count);
-        });
+    console.log("console");
+    getAllPortfolioDates().then( function(dates) {
+        for(i=0;i<dates.length;i++){
+            var res = fetchOnePortfolio(dates[i]);
+        }
     });
 });
 
@@ -82,40 +82,62 @@ function populateListItems() {
     });
 }
 
-function populateFullPortfolio(count) {
-    //Create multi array for portfolio ordered by date
-    let promise = new Promise((resolve, reject) => {
-        let portfolioCollection = [];
-        for (i=0;i<count;i++){
-            portfolioCollection[i] = [];
-        }
-        $.getJSON('/list', function( data ) {
-            $.each(data, function(){
-                loadPortfolioItem(this.id, this.name, portfolioCollection);
+
+function fetchOnePortfolio(pfdate){
+    getPortfolioForDate(pfdate).then(function(result_portf_d){
+        console.log(result_portf_d);
+        color = [chartRandomColor(), chartRandomColor()];
+        for(i=0;i<result_portf_d.length;i++){
+            getOneBondDataFromServer( result_portf_d[i].id ).then(function(result){
+                console.log(result);
+/*
+                var calc = calculateOnePortfolio( result, result_portf_d );
+                for (i=0; i<calc.length; i++){
+                    chartAddLabel(charts_portf[i], getDataset(result, 'date'));
+                    //chartSetTitle(charts_portf[i], selected_name);
+                    
+                    console.log( getDataset(calc[i], 'calculated') );
+
+                    var portfolioDataset = {
+                        label: 'Portfolio ' + (i + 1),
+                        yAxisID: 'B',
+                        data: getDataset(calc[i], 'calculated'), //portfolio
+                        borderColor: [
+                            color[i]
+                        ],
+                        backgroundColor: color[i],
+                        borderWidth: 1,
+                        fill: false,
+                        lineTension: 0
+                    }
+                    chartAddDataset(chart_full, portfolioDataset);
+                }*/
             });
-            resolve(portfolioCollection);
+        }
+    });
+}
+
+function getPortfolioForDate(pfdate){
+    let res = [];
+    let promise = new Promise((resolve, reject) => {
+        $.getJSON('/list/' + pfdate.buydate.split('T')[0], function( data ) {
+            $.each(data, function(){
+                res.push(this);
+            });
+            resolve(res);
         });
     });
     return promise;
 }
 
-function addPortfolioCollection(collection, count){
-    console.log(collection[0].length);
-    for (i=0;i<count;i++){
-        console.log(collection[i]);
-        for(j=0;j<collection[i].length;j++){
-            console.log(collection[i][j]);
-            chartAddDataset(chart_full, collection[i][j]);
-        }
-    }
-}
-
-function getPortfolioCount() {
+function getAllPortfolioDates() {
+    let res = [];
     let promise = new Promise((resolve, reject) => {
         $.getJSON('/count', function( data) {
             $.each(data, function(){
-                resolve(this["count(distinct buydate)"]);
+                res.push(this);
             });
+            resolve(res);
         });
     });
     return promise;
