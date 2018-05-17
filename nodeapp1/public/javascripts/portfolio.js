@@ -14,7 +14,7 @@ $('#sel_portf').change(function() {
     //Get all the data related to the selected bond
     getOneBondDataFromServer( selected_option ).then( function(result) {
         getOnePortfolioDataFromServer( selected_option ).then( function(result_portf) {
-            var calc = calculateOnePortfolio( result, result_portf );
+            var calc = calculateOnePortfolioPerBond( result, result_portf );
             for (i=0; i<calc.length; i++){
                 chartAddLabel(charts_portf[i], getDataset(result, 'date'));
                 chartSetTitle(charts_portf[i], selected_name);

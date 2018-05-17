@@ -1,6 +1,5 @@
 TODO
 
-FIX calculaiton on full portf
 RETURN ONLY A JSON OBJECT FROM THE HTTP REQUEST
 proper variable and function names
 separate common functions and page functions
@@ -18,6 +17,7 @@ cors, sql injection
 
 DONE
 
+FIX calculaiton on full portf
 second page could be sum of portfolios
  -> stack bond portfolios?
 separate chart and table for portfolios on portf page > too big diff in size to small in value change

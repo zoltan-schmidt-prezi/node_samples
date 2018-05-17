@@ -28,11 +28,11 @@ $(document).ready(function() {
         charts_portf.push(chartInit(ctx_portf_arr[i]));
         chartSetTitle(charts_portf[i], "Please select a bond");
     }
-    console.log("console");
+    //Populate merged portfolio
     getAllPortfolioDates().then( function(dates) {
-        for(i=0;i<dates.length;i++){
-            var res = fetchOnePortfolio(dates[i]);
-        }
+        dates.forEach(function(date){
+            fetchOnePortfolio(date);
+        });
     });
 });
 
@@ -84,36 +84,28 @@ function populateListItems() {
 
 
 function fetchOnePortfolio(pfdate){
+    color = chartRandomColor();
     getPortfolioForDate(pfdate).then(function(result_portf_d){
-        console.log(result_portf_d);
-        color = [chartRandomColor(), chartRandomColor()];
-        for(i=0;i<result_portf_d.length;i++){
-            getOneBondDataFromServer( result_portf_d[i].id ).then(function(result){
-                console.log(result);
-/*
-                var calc = calculateOnePortfolio( result, result_portf_d );
-                for (i=0; i<calc.length; i++){
-                    chartAddLabel(charts_portf[i], getDataset(result, 'date'));
-                    //chartSetTitle(charts_portf[i], selected_name);
+        result_portf_d.forEach(function(element) {
+            getOneBondDataFromServer( element.id ).then(function(result){
+                chartAddLabel(chart_full, getDataset(result, 'date'));
+                let calc = calculateOnePortfolioPerDate( result, element );
                     
-                    console.log( getDataset(calc[i], 'calculated') );
-
-                    var portfolioDataset = {
-                        label: 'Portfolio ' + (i + 1),
-                        yAxisID: 'B',
-                        data: getDataset(calc[i], 'calculated'), //portfolio
-                        borderColor: [
-                            color[i]
-                        ],
-                        backgroundColor: color[i],
-                        borderWidth: 1,
-                        fill: false,
-                        lineTension: 0
-                    }
-                    chartAddDataset(chart_full, portfolioDataset);
-                }*/
+                let portfolioDataset = {
+                    label: 'Portfolio ',
+                    yAxisID: 'B',
+                    data: getDataset(calc, 'calculated'), //portfolio
+                    borderColor: [
+                        color
+                    ],
+                    backgroundColor: color,
+                    borderWidth: 1,
+                    fill: false,
+                    lineTension: 0
+                }
+                chartAddDataset(chart_full, portfolioDataset);
             });
-        }
+        });    
     });
 }
 
@@ -197,7 +189,20 @@ function getOnePortfolioDataFromServer( bond_selected_ID ) {
     return promise;
 }
 
-function calculateOnePortfolio( rateData, portfolioData ){
+function calculateOnePortfolioPerDate( rateData, portfolioData ){
+    singlePortfolioDataset = [];
+    for(i=0;i<rateData.length;i++){
+        if (portfolioData.buydate > rateData[i].date){
+            singlePortfolioDataset.push({"date": rateData[i].date, "calcualted": null});
+        }
+        else {
+            singlePortfolioDataset.push({"date": rateData[i].date, "calculated": portfolioData.quantity * rateData[i].rate});
+        }
+    }
+    return singlePortfolioDataset;
+}
+
+function calculateOnePortfolioPerBond( rateData, portfolioData ){
     var portfolioDataset = []
     var singlePortfolioDataset = []
     if (portfolioData.length == 0){
