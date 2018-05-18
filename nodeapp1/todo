@@ -1,5 +1,6 @@
 TODO
 
+SOLVE CALCULATION IN THE BACKEND!!!
 RETURN ONLY A JSON OBJECT FROM THE HTTP REQUEST
 proper variable and function names
 separate common functions and page functions
