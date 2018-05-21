@@ -17,6 +17,7 @@ cors, sql injection
 
 DONE
 
+add basline for portfolios
 separate common functions and page functions
 FIX calculaiton on full portf
 second page could be sum of portfolios
