@@ -65,7 +65,7 @@ function populateTable( bond_selected_JSON_array ) {
     for (i=0;i<bond_selected_JSON_array.length;i++) {
 
         mtableContent += '<tr>';
-        mtableContent += '<td>' + bond_selected_JSON_array[i].date + '</td>';
+        mtableContent += '<td>' + bond_selected_JSON_array[i].date.split('T')[0] + '</td>';
         mtableContent += '<td>' + bond_selected_JSON_array[i].rate + '</td>';
         mtableContent += '<td>' + bond_selected_JSON_array[i].currency + '</td>';
         mtableContent += '</tr>';

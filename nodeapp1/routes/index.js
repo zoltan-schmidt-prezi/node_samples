@@ -45,7 +45,7 @@ router.get('/portfolio/:selected', function(req, res) {
 });
 
 router.get('/count', function(req, res) {
-    let sql = `select distinct buydate from portfolio`;
+    let sql = `select distinct buydate from portfolio order by buydate`;
     runQueryOnDatabase( sql, req, res);
 });
 

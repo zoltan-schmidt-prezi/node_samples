@@ -4,7 +4,7 @@
 
 body {
   height: 100%;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin: 0 0 0 0;
 }
 
@@ -14,61 +14,64 @@ h1 {
     color: white;
 }
 
+h3 {
+    margin:0 0 0 0;
+    padding: 15px;
+    color: white;
+    background-color: var(--main-color);
+    border-radius: 5px;
+}
 #header {
     background-color: var(--main-color);
 }
 select {
     border-radius: 0px;
-    border-color: rgb(169, 169, 169);
-    background-color: var(--main-color);
-    color: white;
+    border-color: white;
+    background-color: white;
+    color: black;
     --text-shadow: 1px 1px #1a1a1a;
+    margin-top: 7px;
+    margin-bottom: 3px;
 }
 
-/*#dropdown_wrapper {
-    --padding-sides:112px;
-    padding-right: var(--padding-sides);
-    padding-left: var(--padding-sides);
-    position:relative;
+.table {
+    margin:0 0 30px 0;
+    font-family:Verdana;
+    border-collapse: collapse;
 }
 
-#wrapper {
-    --padding-sides:112px;
-    padding-right: var(--padding-sides);
-    padding-left: var(--padding-sides);
-    position:relative;
-}*/
-
-#mysqlRateList {
-   margin:0 0 30px 0;
-   font-family:Verdana;
+.table table {
+    border-collapse:separate;
+    border-spacing:1px;
+    background:#CCC;
+    width: 100%;
+    color: #636363;
 }
-   #mysqlRateList table {
-      border-collapse:separate;
-      border-spacing:1px;
-      background:#CCC;
-   }
-      #mysqlRateList table th {
-         background:#EEE;
-         font-weight:600;
-         padding:10px 20px;
-         text-align:center;
-      }
-      #mysqlRateList table tbody {
-         padding:0; margin:0;
-         border-collapse:collapse;
-         border-spacing:0px;
-      }
-         #mysqlRateList table td {
-            background:#FFF;
-            padding:5px 10px;
-            text-align:center;
-         }
+
+.table table th {
+    background:#EEE;
+    font-weight:600;
+    padding:10px 20px;
+    text-align:center;
+}
+
+.table table tbody {
+    padding:0; margin:0;
+    border-collapse:collapse;
+    border-spacing:0px;
+}
+
+.table table td {
+    background:#FFF;
+    padding:5px 10px;
+    text-align:center;
+    color: #636363;
+}
 
 fieldset {
-  border:0;
-  padding:0; 
-  margin:0;
+    border:0;
+    padding:0; 
+    margin:0;
 }
 
 a {color: black;margin: 5px; text-decoration: none;}

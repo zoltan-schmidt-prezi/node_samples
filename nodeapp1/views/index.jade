@@ -18,17 +18,27 @@ block content
       #wrapper
         //MysqlRateList
         h3#tabletitle
-        #mysqlRateList
+        #mysqlRateList.table
             table
                 thead
-                    th date
-                    th rate
-                    th currency
+                    tr
+                        th date
+                        th rate
+                        th currency
                 tbody
         // /mysql Rate list
       // /Wrapper
       p Some news this fine day!
     #Collections.tabcontent
+      //CollectionSumTable
+      h3 Current Total Value
+      #collectionsumtable.table
+        table
+          thead
+            th date
+            th total value
+          tbody
+      // /CollectionSumTable
       canvas#myPortfolio(width='400', height='150')
     #Portfolios.tabcontent
       #dropdown_wrapper
