@@ -1,3 +1,4 @@
+
 function chartInit(ctx){
 
     let default_content = {

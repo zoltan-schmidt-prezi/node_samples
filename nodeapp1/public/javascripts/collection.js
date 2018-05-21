@@ -29,7 +29,7 @@ function fetchOnePortfolio(pfdate){
                 let calc = calculateOnePortfolioPerDate( result, element );
                     
                 let portfolioDataset = {
-                    label: 'Portfolio ',
+                    label: result[0].name,
                     yAxisID: 'B',
                     data: getDataset(calc, 'calculated'), //portfolio
                     borderColor: [
