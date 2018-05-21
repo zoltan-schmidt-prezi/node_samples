@@ -1,3 +1,19 @@
+var chart_pf_single = [];
+
+// DOM Ready =============================================================
+
+$(document).ready(function() {
+
+    //Init 5 portf charts
+    var ctx_portf_arr = [];
+    for(i=0; i<5; i++){
+        ctx_portf_arr.push(document.getElementById("myPortfolio"+i));
+        chart_pf_single.push(chartInit(ctx_portf_arr[i]));
+        chartSetTitle(chart_pf_single[i], "Please select a bond");
+    }
+});
+
+// Functions =============================================================
 
 // Dropdown selection change
 $('#sel_portf').change(function() {
@@ -8,7 +24,7 @@ $('#sel_portf').change(function() {
     let selected_name = $(this).find('option:selected').text();
 
     for(i=0; i<5; i++){
-        chartResetData(charts_portf[i]);
+        chartResetData(chart_pf_single[i]);
     }
 
     //Get all the data related to the selected bond
@@ -16,8 +32,8 @@ $('#sel_portf').change(function() {
         getOnePortfolioDataFromServer( selected_option ).then( function(result_portf) {
             var calc = calculateOnePortfolioPerBond( result, result_portf );
             for (i=0; i<calc.length; i++){
-                chartAddLabel(charts_portf[i], getDataset(result, 'date'));
-                chartSetTitle(charts_portf[i], selected_name);
+                chartAddLabel(chart_pf_single[i], getDataset(result, 'date'));
+                chartSetTitle(chart_pf_single[i], selected_name);
                 
                 console.log( getDataset(calc[i], 'calculated') );
 
@@ -33,8 +49,54 @@ $('#sel_portf').change(function() {
                     fill: false,
                     lineTension: 0
                 }
-                chartAddDataset(charts_portf[i], portfolioDataset);
+                chartAddDataset(chart_pf_single[i], portfolioDataset);
             }
         });
     });
 });
+
+function getOnePortfolioDataFromServer( bond_selected_ID ) {
+    let promise = new Promise((resolve, reject) => {
+        $.getJSON( 'portfolio/' + bond_selected_ID, function( data ) {
+            queryPortfolioSeriesData = [];
+            $.each(data, function(){
+                //get and store data
+                singlePortfolioJSON = {
+                    "id": this.id,
+                    "buydate": this.buydate,
+                    "quantity": this.quantity,
+                    "costperbond": this.costperbond,
+                    "cost": this.cost
+                };
+                queryPortfolioSeriesData.push(singlePortfolioJSON);
+            });
+            resolve(queryPortfolioSeriesData);
+        });
+    });
+    return promise;
+}
+
+function calculateOnePortfolioPerBond( rateData, portfolioData ){
+    var portfolioDataset = []
+    var singlePortfolioDataset = []
+    if (portfolioData.length == 0){
+       return portfolioDataset;
+    }
+    else {
+        // Iterate over all every portfolio item for a single bond
+        for (pf=0; pf<portfolioData.length; pf++){
+            //Calculate value for every date after buydate
+            for (i=0; i<rateData.length; i++){
+                if (portfolioData[pf].buydate > rateData[i].date){
+                    singlePortfolioDataset.push({"date": rateData[i].date, "calcualted": null});
+                }
+                else {
+                    singlePortfolioDataset.push({"date": rateData[i].date, "calculated": portfolioData[pf].quantity * rateData[i].rate});
+                }
+            }
+            portfolioDataset.push(singlePortfolioDataset);
+            singlePortfolioDataset = [];
+        }
+        return portfolioDataset;
+    }
+}
