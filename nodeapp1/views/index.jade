@@ -5,10 +5,9 @@ block content
     h1= title
   body
     button#defaultOpen.tablink(onclick="openPage('ERV', this, 'orange')") Exchange Rates
-    button.tablink(onclick="openPage('Portfolio', this, 'orange')") Portfolio
-    button.tablink(onclick="openPage('Manage', this, 'orange')") Admin
+    button.tablink(onclick="openPage('Collections', this, 'orange')") Collections
+    button.tablink(onclick="openPage('Portfolios', this, 'orange')") Portfolios
     #ERV.tabcontent
-      h3 Exchange Rates
       #dropdown_wrapper
         h3 Select bond
             #dropdown
@@ -29,16 +28,14 @@ block content
         // /mysql Rate list
       // /Wrapper
       p Some news this fine day!
-    #Portfolio.tabcontent
-      h3 Complete portfolio
-        canvas#myPortfolio(width='400', height='150')
-    #Manage.tabcontent
-      h3 Portfolio
-       #dropdown_wrapper
+    #Collections.tabcontent
+      canvas#myPortfolio(width='400', height='150')
+    #Portfolios.tabcontent
+      #dropdown_wrapper
         h3 Select bond
-            #dropdown
-                select(name='sel_portf', id='sel_portf') 
-                    option(value='') 
+          #dropdown
+            select(name='sel_portf', id='sel_portf') 
+              option(value='') 
       #wrapper
         - for (i=0; i<5; i++)
             canvas(id="myPortfolio" + i, width='400', height='100')

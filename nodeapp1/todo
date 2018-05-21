@@ -3,7 +3,6 @@ TODO
 SOLVE CALCULATION IN THE BACKEND!!!
 RETURN ONLY A JSON OBJECT FROM THE HTTP REQUEST
 proper variable and function names
-separate common functions and page functions
 fix hardcoded chart number (5)
 put charts on one page eventually?
 third page can be tabular data
@@ -18,6 +17,7 @@ cors, sql injection
 
 DONE
 
+separate common functions and page functions
 FIX calculaiton on full portf
 second page could be sum of portfolios
  -> stack bond portfolios?
