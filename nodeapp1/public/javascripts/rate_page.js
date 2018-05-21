@@ -58,7 +58,7 @@ function populateTable( bond_selected_JSON_array ) {
     let mtableContent = '';
     
     //Set table title only once
-    let = tableTitle = bond_selected_JSON_array[0].name;
+    let tableTitle = bond_selected_JSON_array[0].name;
     document.getElementById("tabletitle").textContent = "Rate table & charts for '" + tableTitle + "'";
     
     //Fill table with data

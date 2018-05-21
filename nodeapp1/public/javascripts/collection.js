@@ -1,4 +1,5 @@
 var chart_pf_collections;
+var pf_sum = {'date': '', 'calculated': 0};
 
 // DOM Ready =============================================================
 
@@ -13,18 +14,19 @@ $(document).ready(function() {
     //Populate merged portfolio
     getAllPortfolioDates().then( function(dates) {
         dates.forEach(function(date){
-            fetchOnePortfolio(date);
+            fetchOnePortfolioOnDate(date);
         });
     });
 });
 
 // Functions =============================================================
 
-function fetchOnePortfolio(pfdate){
+function fetchOnePortfolioOnDate(pfdate){
     getPortfolioForDate(pfdate).then(function(result_portf_d){
         let color = chartRandomColor();
         result_portf_d.forEach(function(element) {
             getOneBondDataFromServer( element.id ).then(function(result){
+
                 chartAddLabel(chart_pf_collections, getDataset(result, 'date'));
                 let calc = calculateOnePortfolioPerDate( result, element );
                     
@@ -41,6 +43,12 @@ function fetchOnePortfolio(pfdate){
                     lineTension: 0
                 }
                 chartAddDataset(chart_pf_collections, portfolioDataset);
+
+                //Calculate Current Value
+                let currval = calculateOnePortfolioCurrentValue(result, element);
+                pf_sum.calculated += currval.calculated;
+                pf_sum.date = currval.date
+                populateCollectionTable(pf_sum);
             });
         });    
     });
@@ -83,4 +91,21 @@ function calculateOnePortfolioPerDate( rateData, portfolioData ){
         }
     }
     return singlePortfolioDataset;
+}
+
+function calculateOnePortfolioCurrentValue( rateData, portfolioData ){
+    return {"date": rateData[rateData.length - 1].date,
+            "calculated": portfolioData.quantity * rateData[rateData.length - 1].rate};
+}
+
+function populateCollectionTable( collectionTotalValue ) {
+    let mtableContent = '';
+    
+    //Fill table with data
+
+        mtableContent += '<tr>';
+        mtableContent += '<td>' + collectionTotalValue.date.split('T')[0] + '</td>';
+        mtableContent += '<td>' + precisionRound(collectionTotalValue.calculated, 2) + ' HUF' + '</td>';
+        mtableContent += '</tr>';
+    $('#collectionsumtable table tbody').html(mtableContent);
 }

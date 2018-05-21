@@ -1,5 +1,9 @@
 
 // Functions =============================================================
+function precisionRound( number, precision ){
+    let factor = Math.pow(10, precision);
+    return Math.round(number * factor) / factor;
+}
 
 // Populate dropdown list items
 function populateListItems() {
