@@ -31,11 +31,11 @@ $('#sel_portf').change(function() {
     getOneBondDataFromServer( selected_option ).then( function(result) {
         getOnePortfolioDataFromServer( selected_option ).then( function(result_portf) {
             var calc = calculateOnePortfolioPerBond( result, result_portf );
+            console.log( result_portf );
             for (i=0; i<calc.length; i++){
-                chartAddLabel(chart_pf_single[i], getDataset(result, 'date'));
+                labels = getDataset(result, 'date');
+                chartAddLabel(chart_pf_single[i], labels);
                 chartSetTitle(chart_pf_single[i], selected_name);
-                
-                console.log( getDataset(calc[i], 'calculated') );
 
                 var portfolioDataset = {
                     label: 'Portfolio ' + (i + 1),
@@ -50,6 +50,24 @@ $('#sel_portf').change(function() {
                     lineTension: 0
                 }
                 chartAddDataset(chart_pf_single[i], portfolioDataset);
+                let baseline = new Array(labels.length);
+                baseline.fill(result_portf[i].cost);
+                console.log(baseline);
+                
+                var baselineDataset = {
+                    label: 'Baseline ' + (i + 1),
+                    yAxisID: 'B',
+                    data: baseline,
+                    borderColor: [
+                    'rgba(30,255,30,1)'
+                    ],
+                    backgroundColor: 'rgba(30,255,30,1)',
+                    borderWidth: 1,
+                    fill: false,
+                    pointRadius: 0,
+                    lineTension: 0
+                }
+                chartAddDataset(chart_pf_single[i], baselineDataset);
             }
         });
     });

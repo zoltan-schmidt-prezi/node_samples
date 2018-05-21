@@ -21,8 +21,8 @@ $(document).ready(function() {
 // Functions =============================================================
 
 function fetchOnePortfolio(pfdate){
-    color = chartRandomColor();
     getPortfolioForDate(pfdate).then(function(result_portf_d){
+        let color = chartRandomColor();
         result_portf_d.forEach(function(element) {
             getOneBondDataFromServer( element.id ).then(function(result){
                 chartAddLabel(chart_pf_collections, getDataset(result, 'date'));
