@@ -1,5 +1,6 @@
 var chart_pf_collections;
 var pf_sum = {'date': '', 'calculated': 0};
+var collection_sum = [];
 
 // DOM Ready =============================================================
 
@@ -49,6 +50,12 @@ function fetchOnePortfolioOnDate(pfdate){
                 pf_sum.calculated += currval.calculated;
                 pf_sum.date = currval.date
                 populateCollectionTable(pf_sum);
+
+                //Calculate historical data
+                temp = calculateAllPortfolioValue(calc, collection_sum);
+                collection_sum = temp;
+                console.log(collection_sum);
+                //populateCollectionHistoryTable(collection_sum);
             });
         });    
     });
@@ -98,6 +105,21 @@ function calculateOnePortfolioCurrentValue( rateData, portfolioData ){
             "calculated": portfolioData.quantity * rateData[rateData.length - 1].rate};
 }
 
+function calculateAllPortfolioValue( oneDataset, sum ){
+    for(i=0;i<oneDataset.length;i++){
+        if(sum[i] === undefined){
+            sum[i] = {'date': oneDataset[i].date, 'calculated': oneDataset[i].calculated};
+        }
+        else {
+            if(oneDataset[i].calculated === undefined){}
+            else {
+                sum[i].calculated += oneDataset[i].calculated;
+            }
+        }
+    }
+    return sum;
+}
+
 function populateCollectionTable( collectionTotalValue ) {
     let mtableContent = '';
     
@@ -108,4 +130,17 @@ function populateCollectionTable( collectionTotalValue ) {
         mtableContent += '<td>' + precisionRound(collectionTotalValue.calculated, 2) + ' HUF' + '</td>';
         mtableContent += '</tr>';
     $('#collectionsumtable table tbody').html(mtableContent);
+}
+
+function populateCollectionHistoryTable( collectionHistoryValue ){
+
+    let mtableContent = $('#collectionhistorytable table tbody').innerHTML;
+    
+    //Fill table with data
+
+        mtableContent += '<tr>';
+        mtableContent += '<td>' + collectionHistoryValue.date.split('T')[0] + '</td>';
+        mtableContent += '<td>' + precisionRound(collectionHistoryValue.calculated, 2) + ' HUF' + '</td>';
+        mtableContent += '</tr>';
+    $('#collectionhistorytable table tbody').html(mtableContent);
 }
