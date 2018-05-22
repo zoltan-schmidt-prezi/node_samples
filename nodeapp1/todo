@@ -1,15 +1,16 @@
 TODO
 
+historic data for collections (per collection?)
+draw baselines on exchange rate charts
+
 SOLVE CALCULATION IN THE BACKEND!!!
 RETURN ONLY A JSON OBJECT FROM THE HTTP REQUEST
 proper variable and function names
 fix hardcoded chart number (5)
-put charts on one page eventually?
 third page can be tabular data
 
 add historic data
 add date selector
-draw baselines instead of portfolios on exchange rate charts
 
 fix date in moment
 add authentication
