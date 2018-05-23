@@ -1,7 +1,7 @@
 /* Style tab links */
 .tablink {
-    background-color: #66ccff;
-    color: white;
+    background-color: var(--main-color);
+    color: var(--text-color);
     float: left;
     border: none;
     outline: none;
@@ -13,12 +13,13 @@
 }
 
 .tablink:hover {
-    background-color: #99ddff;
+    background-color: var(--hover-color);
 }
 
 /* Style the tab content (and add height:100% for full page content) */
 .tabcontent {
   display: none;
+  margin-top: 15px;
   padding: 50px 50px;
   height: 100%;
 }

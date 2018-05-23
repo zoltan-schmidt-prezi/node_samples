@@ -1,5 +1,10 @@
 :root{
-    --main-color: #66ccff
+    --main-color: #e0edff;
+    --text-color: #0e3263;
+    --text-color-inactive: #8fb7ef;
+    --hover-color: #cce1ff;
+    --hover-color-text: var(--text-color);
+    --highlight-color: var(--hover-color);
 }
 
 body {
@@ -11,13 +16,13 @@ body {
 h1 {
     margin:0 0 0 0;
     padding: 15px;
-    color: white;
+    color: var(--text-color);
 }
 
 h3 {
     margin:0 0 0 0;
     padding: 15px;
-    color: white;
+    color: var(--text-color);
     background-color: var(--main-color);
     border-radius: 5px;
 }
