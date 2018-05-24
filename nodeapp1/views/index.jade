@@ -4,9 +4,9 @@ block content
   #header
     h1= title
   body
-    button#defaultOpen.tablink(onclick="openPage('ERV', this, 'orange')") Exchange Rates
-    button.tablink(onclick="openPage('Collections', this, 'orange')") Collections
-    button.tablink(onclick="openPage('Portfolios', this, 'orange')") Portfolios
+    button#defaultOpen.tablink(onclick="openPage('ERV', this)") Exchange Rates
+    button.tablink(onclick="openPage('Portfolios', this)") Portfolios
+    button.tablink(onclick="openPage('Collections', this)") Collections
     #ERV.tabcontent
       #dropdown_wrapper
         h3 Select bond
@@ -29,6 +29,15 @@ block content
         // /mysql Rate list
       // /Wrapper
       p Some news this fine day!
+    #Portfolios.tabcontent
+      #dropdown_wrapper
+        h3 Select bond
+          #dropdown
+            select(name='sel_portf', id='sel_portf') 
+              option(value='') 
+      #wrapper
+        - for (i=0; i<2; i++)
+            canvas(id="myPortfolio" + i, width='400', height='100')
     #Collections.tabcontent
       //CollectionSumTable
       h3 Current Total Value
@@ -49,12 +58,3 @@ block content
             th total value
           tbody
       // /CollectionHistoryTable
-    #Portfolios.tabcontent
-      #dropdown_wrapper
-        h3 Select bond
-          #dropdown
-            select(name='sel_portf', id='sel_portf') 
-              option(value='') 
-      #wrapper
-        - for (i=0; i<2; i++)
-            canvas(id="myPortfolio" + i, width='400', height='100')
