@@ -1,5 +1,8 @@
 TODO
 
+!!!!add date selector
+fix date in moment
+
 historic data for collections (per collection?)
 draw baselines on exchange rate charts
 
@@ -7,17 +10,13 @@ SOLVE CALCULATION IN THE BACKEND!!!
 RETURN ONLY A JSON OBJECT FROM THE HTTP REQUEST
 proper variable and function names
 fix hardcoded chart number (5)
-third page can be tabular data
 
-add historic data
-add date selector
-
-fix date in moment
 add authentication
 cors, sql injection
 
 DONE
 
+add historic data
 add basline for portfolios
 separate common functions and page functions
 FIX calculaiton on full portf

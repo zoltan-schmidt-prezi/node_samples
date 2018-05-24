@@ -32,6 +32,7 @@ router.get('/rates/:selected', function(req, res) {
     let sql = `select selector.id, selector.name, main_exchange.date, main_exchange.rate, main_exchange.sum, main_exchange.updated, selector.currency from main_exchange inner join selector on main_exchange.id=selector.id where selector.id=`;
     
     sql = sql + req.params.selected;
+    sql = sql + ` order by date`;
 
     runQueryOnDatabase( sql, req, res);
 });

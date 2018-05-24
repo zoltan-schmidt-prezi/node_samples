@@ -4,8 +4,12 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mysql = require('mysql');
+var https = require('https');
 
 var indexRouter = require('./routes/index');
+var https_options = {};// { key: key, cert: cert };
+var PORT = 3000;
+var HOST = 'localhost';
 
 var app = express();
 // database 
@@ -52,6 +56,8 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+//server = https.createServer(https_options, app).listen(HOST, PORT); 
+//console.log('HTTPS Server listening on %s:%s',HOST, PORT);
 app.listen(3000, () => console.log('App listening on port!'))
 
 module.exports = app;
