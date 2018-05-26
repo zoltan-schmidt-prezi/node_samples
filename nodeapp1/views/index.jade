@@ -13,6 +13,7 @@ block content
             #dropdown
                 select(name='sel_name', id='sel_name') 
                     option(value='')
+                text#picker Limit date from:
                 input#fromdate(type='date') 
         canvas#myChart(width='400', height='100')
       //Wrapper
@@ -36,6 +37,7 @@ block content
           #dropdown
             select(name='sel_portf', id='sel_portf') 
               option(value='') 
+            text#picker Limit date from:
             input#fromdate_p(type='date') 
       #wrapper
         - for (i=0; i<2; i++)

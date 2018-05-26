@@ -31,10 +31,12 @@ h3 {
 }
 select {
     border-radius: 0px;
+    border-width: 0px;
     border-color: white;
     background-color: white;
     color: black;
     --text-shadow: 1px 1px #1a1a1a;
+    font: 12px;
     margin-top: 7px;
     margin-bottom: 3px;
 }
@@ -71,6 +73,29 @@ select {
     padding:5px 10px;
     text-align:center;
     color: #636363;
+}
+
+input[type="date"]::-webkit-clear-button {
+    display: none;
+}
+
+input[type="date"]::-webkit-inner-spin-button {
+    display: none;
+}
+
+input[type="date"] {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    border-radius: 0px;
+    border-width: 0px;
+    border-color: white;
+    margin-left: 20px;
+}
+
+#picker {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    margin-left: 20px;
 }
 
 fieldset {
