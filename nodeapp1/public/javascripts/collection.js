@@ -55,7 +55,7 @@ function fetchOnePortfolioOnDate(pfdate){
                 //Calculate historical data
                 temp = calculateAllPortfolioValue(calc, collection_sum);
                 collection_sum = temp;
-                console.log(collection_sum);
+                //console.log(collection_sum);
                 //populateCollectionHistoryTable(collection_sum);
             });
         });    

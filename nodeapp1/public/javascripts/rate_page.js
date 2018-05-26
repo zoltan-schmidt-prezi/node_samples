@@ -20,15 +20,29 @@ $(document).ready(function() {
 
 // Dropdown selection change
 $('#sel_name').change(function() {
+    renderPageContentRP(this);
+});
+
+// Date picker selection change
+document.getElementById("fromdate").onchange = function(){
+    /*console.log(this.value);
+    //Get the fromate from the date picker
+    renderPageContentRP(select)*/
+}
+
+function renderPageContentRP(select) {
+
+    let fromdate = getSelectedDate();
+
     //Get the id of the selected bond in the dropdown
-    let selected_option =  $(this).find('option:selected').attr('value');
+    let selected_option =  $(select).find('option:selected').attr('value');
 
     //Get the name of the selected bond in the dropdown
-    let selected_name = $(this).find('option:selected').text();
+    let selected_name = $(select).find('option:selected').text();
     chartSetTitle(chart_rates, selected_name);
     
     //Get all the data related to the selected bond
-    getOneBondDataFromServer( selected_option ).then( function(result) {
+    getOneBondDataFromServer( selected_option, fromdate ).then( function(result) {
         //populate the rate table on selection change
         populateTable(result);
         //Generate chart on x=date, y=rate
@@ -51,7 +65,7 @@ $('#sel_name').change(function() {
         chartAddDataset(chart_rates, rateDataset);
     });
     showContent("wrapper");
-});
+}
 
 
 // Fill table with data

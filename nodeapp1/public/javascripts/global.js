@@ -10,17 +10,20 @@ function populateListItems() {
     $.getJSON('/list', function( data ) {
         $.each(data, function(){
             // Add dropdown list options with name and value
-            add_option("sel_name", this.name, this.id);
-            add_option("sel_portf", this.name, this.id);
+            addOption("sel_name", this.name, this.id);
+            addOption("sel_portf", this.name, this.id);
         });
     });
 }
 
-function add_option(select_id, text, id) {
+function addOption(select_id, text, id) {
     let select = document.getElementById(select_id);
     select.options[select.options.length] = new Option(text, id);
 }
 
+function getSelectedDate() {
+    return document.getElementById("fromdate").value;
+}
 function showContent( content ) {
     var x = document.getElementById( content );
     x.style.display = "block";
