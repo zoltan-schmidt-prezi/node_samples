@@ -63,3 +63,24 @@ function getOneBondDataFromServer( bond_selected_ID, fromdate ) {
     });
     return promise;
 }
+
+function getOnePortfolioDataFromServer( bond_selected_ID ) {
+    let promise = new Promise((resolve, reject) => {
+        $.getJSON( 'portfolio/' + bond_selected_ID, function( data ) {
+            queryPortfolioSeriesData = [];
+            $.each(data, function(){
+                //get and store data
+                singlePortfolioJSON = {
+                    "id": this.id,
+                    "buydate": this.buydate,
+                    "quantity": this.quantity,
+                    "costperbond": this.costperbond,
+                    "cost": this.cost
+                };
+                queryPortfolioSeriesData.push(singlePortfolioJSON);
+            });
+            resolve(queryPortfolioSeriesData);
+        });
+    });
+    return promise;
+}

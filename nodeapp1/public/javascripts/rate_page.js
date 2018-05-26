@@ -61,9 +61,34 @@ function renderPageContentRP(select) {
             lineTension: 0
         }
         chartResetData(chart_rates);
-        chartAddLabel(chart_rates, getDataset(result, 'date'));
+        let chart_label = getDataset(result, 'date');
+        chartAddLabel(chart_rates, chart_label);
         chartAddDataset(chart_rates, rateDataset);
+        
+    //Add baselineRates for buydates
+        getOnePortfolioDataFromServer( selected_option ).then( function(portf){
+            portf.forEach(function(elem){
+                console.log(portf);        
+                let baselineRate = new Array(chart_label.length);
+                baselineRate.fill(elem.costperbond);
+                
+                var baselineRateDataset = {
+                    label: 'Baseline' + elem.id,
+                    yAxisID: 'B',
+                    data: baselineRate,
+                    borderColor: [
+                    'rgba(30,255,30,1)'
+                    ],
+                    borderWidth: 1,
+                    fill: false,
+                    pointRadius: 0,
+                    pointHitRadius: 10
+                }
+                chartAddDataset(chart_rates, baselineRateDataset);
+            });
+        });
     });
+
     showContent("wrapper");
 }
 

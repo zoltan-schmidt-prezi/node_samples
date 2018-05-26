@@ -1,11 +1,12 @@
 TODO
 
+add buydates for baseline on rate page
+PUT all portfolios on one page > no selector needed
 fix date in moment
 set default selection for dropdown
 trigger refresh after date selection (events?)
 
 tabular historic data for collections (per collection?)
-draw baselines on exchange rate charts
 
 SOLVE CALCULATION IN THE BACKEND!!!
 RETURN ONLY A JSON OBJECT FROM THE HTTP REQUEST
@@ -17,6 +18,7 @@ cors, sql injection
 
 DONE
 
+draw baselines on exchange rate charts
 !!!!add date selector
 add historic data
 add basline for portfolios
