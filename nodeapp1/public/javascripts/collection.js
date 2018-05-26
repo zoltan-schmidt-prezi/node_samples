@@ -40,6 +40,7 @@ function fetchOnePortfolioOnDate(pfdate){
                     ],
                     backgroundColor: color,
                     borderWidth: 1,
+                    pointRadius: 0,
                     fill: false,
                     lineTension: 0
                 }

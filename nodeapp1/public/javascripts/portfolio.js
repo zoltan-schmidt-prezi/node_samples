@@ -46,6 +46,7 @@ $('#sel_portf').change(function() {
                     ],
                     backgroundColor: 'rgba(178, 9, 164, 1)',
                     borderWidth: 1,
+                    pointRadius: 0,
                     fill: false,
                     lineTension: 0
                 }

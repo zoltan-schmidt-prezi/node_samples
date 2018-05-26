@@ -58,6 +58,6 @@ app.use(function(err, req, res, next) {
 
 //server = https.createServer(https_options, app).listen(HOST, PORT); 
 //console.log('HTTPS Server listening on %s:%s',HOST, PORT);
-app.listen(3000, () => console.log('App listening on port!'))
+//app.listen(3000, () => console.log('App listening on port!'))
 
 module.exports = app;

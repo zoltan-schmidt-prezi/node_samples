@@ -42,6 +42,7 @@ $('#sel_name').change(function() {
             ],
             backgroundColor: 'rgba(255, 159, 64, 1)',
             borderWidth: 1,
+            pointRadius: 0,
             fill: false,
             lineTension: 0
         }
