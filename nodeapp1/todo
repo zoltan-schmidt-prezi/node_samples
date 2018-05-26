@@ -1,9 +1,10 @@
 TODO
 
-!!!!add date selector
 fix date in moment
+set default selection for dropdown
+trigger refresh after date selection (events?)
 
-historic data for collections (per collection?)
+tabular historic data for collections (per collection?)
 draw baselines on exchange rate charts
 
 SOLVE CALCULATION IN THE BACKEND!!!
@@ -16,6 +17,7 @@ cors, sql injection
 
 DONE
 
+!!!!add date selector
 add historic data
 add basline for portfolios
 separate common functions and page functions
