@@ -11,12 +11,16 @@ $(document).ready(function() {
         chart_pf_single.push(chartInit(ctx_portf_arr[i]));
         chartSetTitle(chart_pf_single[i], "Please select a bond");
     }
+    document.getElementById("fromdate_p").value = '2018-01-01';
 });
 
 // Functions =============================================================
 
 // Dropdown selection change
 $('#sel_portf').change(function() {
+    //Get fromdate
+    let fromdate = getSelectedDate("fromdate_p");
+
     //Get the id of the selected bond in the dropdown
     let selected_option =  $(this).find('option:selected').attr('value');
 
@@ -28,7 +32,7 @@ $('#sel_portf').change(function() {
     }
 
     //Get all the data related to the selected bond
-    getOneBondDataFromServer( selected_option ).then( function(result) {
+    getOneBondDataFromServer( selected_option, fromdate ).then( function(result) {
         getOnePortfolioDataFromServer( selected_option ).then( function(result_portf) {
             var calc = calculateOnePortfolioPerBond( result, result_portf );
             for (i=0; i<calc.length; i++){
@@ -47,6 +51,7 @@ $('#sel_portf').change(function() {
                     backgroundColor: 'rgba(178, 9, 164, 1)',
                     borderWidth: 1,
                     pointRadius: 0,
+                    pointHitRadius: 10,
                     fill: false,
                     lineTension: 0
                 }
@@ -66,6 +71,7 @@ $('#sel_portf').change(function() {
                     borderWidth: 1,
                     fill: false,
                     pointRadius: 0,
+                    pointHitRadius: 10
                 }
                 chartAddDataset(chart_pf_single[i], baselineDataset);
             }

@@ -13,7 +13,7 @@ $(document).ready(function() {
     var ctx = document.getElementById("myChart");
     chart_rates = chartInit(ctx);
     chartSetTitle(chart_rates, "Please select a bond");
-
+    document.getElementById("fromdate").value = '2018-01-01';
 });
 
 // Functions =============================================================
@@ -32,7 +32,7 @@ document.getElementById("fromdate").onchange = function(){
 
 function renderPageContentRP(select) {
 
-    let fromdate = getSelectedDate();
+    let fromdate = getSelectedDate("fromdate");
 
     //Get the id of the selected bond in the dropdown
     let selected_option =  $(select).find('option:selected').attr('value');

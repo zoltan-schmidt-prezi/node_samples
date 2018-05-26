@@ -36,6 +36,9 @@ function chartInit(ctx){
                     fontColor: 'rgb(100, 100, 100)',
                     usePointStyle: true
                 }
+            },
+            tooltips: {
+                mode: 'label'
             }
         }
     }

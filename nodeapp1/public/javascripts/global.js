@@ -21,8 +21,8 @@ function addOption(select_id, text, id) {
     select.options[select.options.length] = new Option(text, id);
 }
 
-function getSelectedDate() {
-    return document.getElementById("fromdate").value;
+function getSelectedDate(picker) {
+    return document.getElementById(picker).value;
 }
 function showContent( content ) {
     var x = document.getElementById( content );
@@ -41,9 +41,9 @@ function getDataset( bond_selected_JSON_array, dataType ){
 }
 
 // Get all data for one bond from Database
-function getOneBondDataFromServer( bond_selected_ID ) {
+function getOneBondDataFromServer( bond_selected_ID, fromdate ) {
     let promise = new Promise((resolve, reject) => {
-        $.getJSON( 'rates/' + bond_selected_ID, function( data ) {
+        $.getJSON( 'rates/' + bond_selected_ID + '/' + fromdate, function( data ) {
             queryRateSeriesData = [];
             $.each(data, function(){
                 //get and store data

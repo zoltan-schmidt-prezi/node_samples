@@ -1,6 +1,7 @@
 var chart_pf_collections;
 var pf_sum = {'date': '', 'calculated': 0};
 var collection_sum = [];
+var fromdate_c = '2018-02-01';
 
 // DOM Ready =============================================================
 
@@ -26,7 +27,7 @@ function fetchOnePortfolioOnDate(pfdate){
     getPortfolioForDate(pfdate).then(function(result_portf_d){
         let color = chartRandomColor();
         result_portf_d.forEach(function(element) {
-            getOneBondDataFromServer( element.id ).then(function(result){
+            getOneBondDataFromServer( element.id, fromdate_c ).then(function(result){
 
                 chartAddLabel(chart_pf_collections, getDataset(result, 'date'));
                 let calc = calculateOnePortfolioPerDate( result, element );
@@ -41,6 +42,7 @@ function fetchOnePortfolioOnDate(pfdate){
                     backgroundColor: color,
                     borderWidth: 1,
                     pointRadius: 0,
+                    pointHitRadius: 10,
                     fill: false,
                     lineTension: 0
                 }
