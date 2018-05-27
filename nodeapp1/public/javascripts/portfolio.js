@@ -1,4 +1,5 @@
 var chart_pf_single = [];
+var fromdate_pf = '2018-03-14';
 
 // DOM Ready =============================================================
 
@@ -11,10 +12,16 @@ $(document).ready(function() {
         chart_pf_single.push(chartInit(ctx_portf_arr[i]));
         chartSetTitle(chart_pf_single[i], "Please select a bond");
     }
-    document.getElementById("fromdate_p").value = '2018-01-01';
+    document.getElementById("fromdate_p").value = fromdate_pf;
 });
 
 // Functions =============================================================
+
+// Date picker selection change
+document.getElementById("fromdate_p").onchange = function(){
+    var event_p = new Event('change');
+    document.getElementById("sel_portf").dispatchEvent(event_p);
+}
 
 // Dropdown selection change
 $('#sel_portf').change(function() {

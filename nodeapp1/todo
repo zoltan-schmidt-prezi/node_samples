@@ -1,10 +1,9 @@
 TODO
 
+add progress bar for chartjs?
 add buydates for baseline on rate page
 PUT all portfolios on one page > no selector needed
 fix date in moment
-set default selection for dropdown
-trigger refresh after date selection (events?)
 
 tabular historic data for collections (per collection?)
 
@@ -18,6 +17,8 @@ cors, sql injection
 
 DONE
 
+NOT NEEDED set default selection for dropdown
+trigger refresh after date selection (events?)
 draw baselines on exchange rate charts
 !!!!add date selector
 add historic data

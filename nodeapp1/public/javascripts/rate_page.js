@@ -25,9 +25,8 @@ $('#sel_name').change(function() {
 
 // Date picker selection change
 document.getElementById("fromdate").onchange = function(){
-    /*console.log(this.value);
-    //Get the fromate from the date picker
-    renderPageContentRP(select)*/
+    var event = new Event('change');
+    document.getElementById("sel_name").dispatchEvent(event);
 }
 
 function renderPageContentRP(select) {
@@ -68,7 +67,6 @@ function renderPageContentRP(select) {
     //Add baselineRates for buydates
         getOnePortfolioDataFromServer( selected_option ).then( function(portf){
             portf.forEach(function(elem){
-                console.log(portf);        
                 let baselineRate = new Array(chart_label.length);
                 baselineRate.fill(elem.costperbond);
                 
