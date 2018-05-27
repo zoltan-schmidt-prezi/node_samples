@@ -6,6 +6,7 @@ block content
   body
     button#defaultOpen.tablink(onclick="openPage('ERV', this)") Exchange Rates
     button.tablink(onclick="openPage('Portfolios', this)") Portfolios
+    button.tablink(onclick="openPage('Portfolios_all', this)") All Portfolios
     button.tablink(onclick="openPage('Collections', this)") Collections
     #ERV.tabcontent
       #dropdown_wrapper
@@ -30,7 +31,6 @@ block content
                 tbody
         // /mysql Rate list
       // /Wrapper
-      p Some news this fine day!
     #Portfolios.tabcontent
       #dropdown_wrapper
         h3 Select bond
@@ -40,6 +40,8 @@ block content
             text#picker Limit date from:
             input#fromdate_p(type='date') 
       #wrapper_pf
+    #Portfolios_all.tabcontent
+      h3 All portfolios go here
     #Collections.tabcontent
       //CollectionSumTable
       h3 Current Total Value
