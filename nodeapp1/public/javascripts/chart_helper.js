@@ -47,6 +47,33 @@ function chartInit(ctx){
     return ratesChart;
 }
 
+function insertChart(parent_id, chart_id) {
+    parent_elem = document.getElementById(parent_id);
+    var ins = document.createElement("canvas")
+    ins.setAttribute("id", "myPortfolio" + chart_id);
+    ins.setAttribute("width", "400");
+    ins.setAttribute("height", "100");
+    parent_elem.appendChild(ins);
+    return ins;
+}
+
+function removeCharts(parent_id) {
+    parent_elem = document.getElementById(parent_id)
+    while(parent_elem.hasChildNodes()) {
+        parent_elem.removeChild(parent_elem.childNodes[0])
+    }
+}
+
+function insertNoData(parent_id, text) {
+    parent_elem = document.getElementById(parent_id);
+    let ins = document.createElement("h2");
+    let txt = document.createTextNode(text);
+    ins.appendChild(txt);
+    parent_elem.appendChild(ins);
+    return ins;
+}
+
+
 function chartSetTitle(chart, title) {
     chart.options.title.display = 'true';
     chart.options.title.text = title;

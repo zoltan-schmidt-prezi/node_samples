@@ -10,13 +10,13 @@ tabular historic data for collections (per collection?)
 SOLVE CALCULATION IN THE BACKEND!!!
 RETURN ONLY A JSON OBJECT FROM THE HTTP REQUEST
 proper variable and function names
-fix hardcoded chart number (5)
 
 add authentication
 cors, sql injection
 
 DONE
 
+fix hardcoded chart number (5)
 NOT NEEDED set default selection for dropdown
 trigger refresh after date selection (events?)
 draw baselines on exchange rate charts
