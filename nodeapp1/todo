@@ -1,7 +1,7 @@
 TODO
 
+add missing data for remaining bonds
 add buydates for baseline on rate page
-PUT all portfolios on one page > no selector needed
 ??fix date in moment
 
 tabular historic data for collections (per collection?)
@@ -15,6 +15,7 @@ cors, sql injection
 
 DONE
 
+PUT all portfolios on one page > no selector needed
 fix hardcoded chart number (5)
 NOT NEEDED set default selection for dropdown
 trigger refresh after date selection (events?)

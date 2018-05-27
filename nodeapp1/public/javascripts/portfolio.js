@@ -3,13 +3,6 @@ var fromdate_pf = '2018-03-14';
 // DOM Ready =============================================================
 
 $(document).ready(function() {
-
-    //Init 5 portf charts
-/*    for(i=0; i<2; i++){
-        ctx_portf_arr.push(document.getElementById("myPortfolio"+i));
-        chart_pf_single.push(chartInit(ctx_portf_arr[i]));
-        chartSetTitle(chart_pf_single[i], "Please select a bond");
-    }*/
     document.getElementById("fromdate_p").value = fromdate_pf;
 });
 

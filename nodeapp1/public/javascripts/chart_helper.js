@@ -47,10 +47,9 @@ function chartInit(ctx){
     return ratesChart;
 }
 
-function insertChart(parent_id, chart_id) {
+function insertChart(parent_id, page_id, chart_id) {
     parent_elem = document.getElementById(parent_id);
     var ins = document.createElement("canvas")
-    ins.setAttribute("id", "myPortfolio" + chart_id);
     ins.setAttribute("width", "400");
     ins.setAttribute("height", "100");
     parent_elem.appendChild(ins);

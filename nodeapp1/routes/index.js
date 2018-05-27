@@ -26,6 +26,16 @@ router.get('/list/:date', function(req, res) {
     runQueryOnDatabase( sql, req, res);
 });
 
+/* get all item names and ids for existing bonds*/
+router.get('/list_all', function(req, res) {
+    var mysqldb = req.mysqldb;
+
+    let sql = `select distinct portfolio.id, selector.name from portfolio inner join selector on portfolio.id=selector.id`;
+
+    runQueryOnDatabase( sql, req, res);
+});
+
+
 /* GET rates from db. */
 router.get('/rates/:selected', function(req, res) {
 
@@ -87,6 +97,5 @@ function runQueryOnDatabase( query_string, req, res ){
     
    
 }
-
 
 module.exports = router;
