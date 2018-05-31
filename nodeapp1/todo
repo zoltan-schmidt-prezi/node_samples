@@ -1,5 +1,11 @@
 TODO
 
+stack rates to compare
+add selldate to mysql
+add selldate as baseline
+add extra costs to mysql
+add corrected cost to charts
+
 add missing data for remaining bonds
 add buydates for baseline on rate page
 ??fix date in moment
